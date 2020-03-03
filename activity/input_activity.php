@@ -20,24 +20,24 @@ if( !empty($_GET["id"]) ){
 
 /* SUBMIT */
 if( !empty($_POST) ){
+  $sql->table= "activity";
   if( !empty($_POST["id"]) ){
-    $sql->value="ac_title='{$_POST["ac_title"]}', news_type_id='{$_POST["news_type_id"]}', news_detail='{$_POST["news_detail"]}'";
-    $sql->condition="WHERE news_id={$_POST["id"]}";
+    $sql->value="ac_title='{$_POST["ac_title"]}', year_stu='{$_POST["year_stu"]}', ac_start='{$_POST["ac_start"]}',ac_end='{$_POST["ac_end"]}',ac_type_id='{$_POST["ac_type_id"]}',ac_status='{$_POST["ac_status"]}',ac_detail='{$_POST["ac_detail"]}'";
+    $sql->condition="WHERE ac_id={$_POST["id"]}";
     if( $sql->update() ){
       $alert = "แก้ไขข้อมูลเรียบร้อยแล้ว";
-      $location = URL."news/newsmanage.php";
+      $location = URL."activity/activitymanage.php";
     }
     else{
       $alert = "ไม่สามารถบันทึกข้อมูลได้";
     }
   }
   else{
-    $sql->table= "activity";
-    $sql->field= "ac_title, news_type_id, news_detail";
-    $sql->value= "'{$_POST["ac_title"]}','{$_POST["news_type_id"]}','{$_POST["news_detail"]}'";
+    $sql->field= "ac_title,year_stu,ac_start,ac_end,ac_type_id,ac_status,ac_detail";
+    $sql->value= "'{$_POST["ac_title"]}','{$_POST["year_stu"]}','{$_POST["ac_start"]}','{$_POST["ac_end"]}','{$_POST["ac_type_id"]}','{$_POST["ac_status"]}','{$_POST["ac_detail"]}'";
     if( $sql->insert() ){
         $alert = "บันทึกข้อมูลเรียบร้อยแล้ว";
-        $location = URL."news/newsmanage.php";
+        $location = URL."activity/activitymanage.php";
     }
     else{
         $alert = "ไม่สามารถบันทึกข้อมูลได้";
@@ -68,32 +68,29 @@ if( !empty($_POST) ){
     <input type="type" class="form-control" id="year_stu" name="year_stu" placeholder="ปีการศึกษา"value="<?php echo !empty($res["year_stu"]) ? $res["year_stu"] : "" ?>">
   </div>  <div class="form-group" method="POST">
     <label for="ac_start">วันที่เริ่มต้น</label>
-    <input type="type" class="form-control" id="ac_start" name="ac_start" placeholder="วันที่เริ่มต้น"value="<?php echo !empty($res["ac_start"]) ? $res["ac_start"] : "" ?>">
+    <input type="date" class="form-control" id="ac_start" name="ac_start" placeholder="วันที่เริ่มต้น"value="<?php echo !empty($res["ac_start"]) ? $res["ac_start"] : "" ?>">
   </div>  <div class="form-group" method="POST">
     <label for="ac_end">วันที่สิ้นสุด</label>
-    <input type="type" class="form-control" id="ac_end" name="ac_end" placeholder="วันที่สิ้นสุด"value="<?php echo !empty($res["ac_end"]) ? $res["ac_end"] : "" ?>">
+    <input type="date" class="form-control" id="ac_end" name="ac_end" placeholder="วันที่สิ้นสุด"value="<?php echo !empty($res["ac_end"]) ? $res["ac_end"] : "" ?>">
   </div>
   <div class="form-group">
     <label for="ac_status">สถานะกิจกรรม</label>
     <?php 
-    $sql->table = "activity";
-    $sql->field = "*";
-    $sql->condition = "";
-    $typeQuery = $sql->select();
+    $sType[] = array("id"=>1, "name"=>"กำลังจะมาถึง");
+    $sType[] = array("id"=>2, "name"=>"ผ่านไปแล้ว");
+    $sType[] = array("id"=>3, "name"=>"ยังไม่กำหนด");
     ?>
     <select class="form-control" id="ac_status" name="ac_status">
       <option value="">-- เลือกประเภท --</option>
       <?php
-      while($type = mysqli_fetch_assoc($typeQuery)
-      ){
+      foreach($sType as $type){
         $sel = "";
-        $ac_status_select = "";
         if( !empty($res["ac_status"]) ){
-          if( $res["ac_status"] == $type["ac_status"] )
+          if( $res["ac_status"] == $type["id"] )
           $sel = 'selected';
         }
         ?>
-        <option <?=$sel?> value="<?=$type["ac_status"]?>"><?=$type["ac_status"]?></option>
+        <option <?=$sel?> value="<?=$type["id"]?>"><?=$type["name"]?></option>
         <?php
       }
       ?>
@@ -124,8 +121,8 @@ if( !empty($_POST) ){
   </div>
 
   <div class="form-group">
-    <label for="news_detail">รายละเอียดกิจกรรม</label>
-    <textarea class="form-control textarea"COLS=50 ROWS=6 id="news_detail" placeholder="รายละเอียดกิจกรรม"><?php echo !empty($res["ac_detail"]) ? nl2br($res["ac_detail"]) : "" ?></textarea>
+    <label for="ac_detail">รายละเอียดกิจกรรม</label>
+    <textarea class="form-control textarea"COLS=50 ROWS=6 id="ac_detail" name="ac_detail" placeholder="รายละเอียดกิจกรรม"><?php echo !empty($res["ac_detail"]) ? $res["ac_detail"] : "" ?></textarea>
    
   </div>
   <?php 
