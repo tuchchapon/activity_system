@@ -15,10 +15,42 @@ $query=$sql->select();
 <div class="content-wrapper">
 	<div class="content-header">
       <div class="container-fluid">
+        
         <div class="row mb-2">
+            
           <div class="col-sm-6">
             <h1 class="m-0 text-dark">จัดการนักศึกษา</h1>
+            <div class="row mb-2">
+        <div class="filter">
+      <div class="form-group">
+    <label for="stu_level">เลือกนักศึกษาตามชั้นปี</label>
+    <?php 
+    $sType[] = array("id"=>1, "name"=>"ปี 1 ");
+    $sType[] = array("id"=>2, "name"=>"ปี 2 ");
+    $sType[] = array("id"=>3, "name"=>"ปี 3");
+    $sType[] = array("id"=>4, "name"=>"ปี 4");
+    $sType[] = array("id"=>5, "name"=>"ศิษย์เก่า");
+    ?>
+    <select class="form-control" id="stu_level" name="stu_level">
+      <option value="">-- เลือกชั้นปี --</option>
+      <?php
+      foreach($sType as $type){
+        $sel = "";
+        if( !empty($res["stu_level"]) ){
+          if( $res["stu_level"] == $type["id"] )
+          $sel = 'selected';
+        }
+        ?>
+        <option <?=$sel?> value="<?=$type["id"]?>"><?=$type["name"]?></option>
+        <?php
+      }
+      ?>
+    </select>
+  </div>
+  </div>
+    </div> 
           </div>
+          
           <div class="col-sm-6">
             <a href="<?=URL?>users/input_stu.php" class="btn btn-primary text-white float-right">เพิ่มนักศึกษา 
                </a>
@@ -35,7 +67,7 @@ $query=$sql->select();
               <thead>
                   <tr class="text-center table-info">
                       <th width="10%">ลำดับ</th>
-                      <th width="20%">username</th>
+                      <th width="20%">รหัสนักศึกษา</th>
                       <th width="20%">ชื่อ</th>
                       <th width="10%">ชั้นปี</th>
                       <th width="20%">สถานะ</th>

@@ -30,6 +30,7 @@ $query=$sql->select();
     </div>
 
     <section class="content">
+    <div class="card p-3">
       <div class="container-fluid">
           <table class="table table-bordered">
               <thead>
@@ -56,6 +57,7 @@ $query=$sql->select();
                   <?php } ?>
               </tbody>
           </table>
+      </div>
       </div>
   </section>
 </div>

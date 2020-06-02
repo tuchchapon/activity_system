@@ -69,18 +69,10 @@
           			</li>
           		</ul>
           	</li>
-          	<li class="nav-item">
-          		<a href="pages/widgets.html" class="nav-link">
-          			<i class="nav-icon fas fa-users"></i>
-          			<p>
-          					
-          				<!-- <span class="right badge badge-danger">New</span> -->
-          			</p>
-          		</a>
-          	</li>
+
           	<li class="nav-header">การจัดการผู้ใช้งาน</li>
           	<li class="nav-item">
-          		<a href="<?=URL?>users/usermanage.php" class="nav-link">
+          		<a href="<?=URL?>users/stu_manage.php" class="nav-link">
           			<i class="nav-icon fas fa-users-cog"></i>
           			<p>จัดการนักศึกษา
 						  

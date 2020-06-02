@@ -67,10 +67,10 @@ if( !empty($_POST) ){
     <label for="year_stu">ปีการศึกษา</label>
     <input type="type" class="form-control" id="year_stu" name="year_stu" placeholder="ปีการศึกษา"value="<?php echo !empty($res["year_stu"]) ? $res["year_stu"] : "" ?>">
   </div>  <div class="form-group" method="POST">
-    <label for="ac_start">วันที่เริ่มต้น</label>
+    <label for="ac_start">วันที่เริ่มต้น(เดือน/วัน/ปี)</label>
     <input type="date" class="form-control" id="ac_start" name="ac_start" placeholder="วันที่เริ่มต้น"value="<?php echo !empty($res["ac_start"]) ? $res["ac_start"] : "" ?>">
   </div>  <div class="form-group" method="POST">
-    <label for="ac_end">วันที่สิ้นสุด</label>
+    <label for="ac_end">วันที่สิ้นสุด(เดือน/วัน/ปี)</label>
     <input type="date" class="form-control" id="ac_end" name="ac_end" placeholder="วันที่สิ้นสุด"value="<?php echo !empty($res["ac_end"]) ? $res["ac_end"] : "" ?>">
   </div>
   <div class="form-group">
