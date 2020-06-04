@@ -14,7 +14,7 @@ if( mysqli_fetch_assoc($query) > 0 ){
 foreach($_POST["year"] as $key => $level){
     $sql->table = "student";
     $sql->field = "*";
-    $sql->condition = "WHERE stu_level = {$level}";
+    $sql->condition = "WHERE stu_level = {$level} AND stu_status <> 2";
     $query = $sql->select();
     if( mysqli_num_rows($query) > 0 ){
         while($stu = mysqli_fetch_assoc($query)){

@@ -7,8 +7,20 @@ include("../layouts/navbar.php");
 
 //MENU
 include("../layouts/menu.php");
+
+$condition = "";
+if( !empty($_GET) ){
+  foreach( $_GET as $key => $value ){
+    $condition .= !empty( $condition ) ? " AND " : "";
+    $condition .= "{$key}='{$value}'";
+  }
+}
+
+$condition = !empty($condition) ? "WHERE {$condition}" : "";
+
 $sql->table = "student";
 $sql->field = "*";
+$sql->condition = $condition;
 $query=$sql->select();
 ?>
 <!-- Content -->
@@ -25,23 +37,23 @@ $query=$sql->select();
       <div class="form-group">
     <label for="stu_level">เลือกนักศึกษาตามชั้นปี</label>
     <?php 
-    $sType[] = array("id"=>1, "name"=>"ปี 1 ");
-    $sType[] = array("id"=>2, "name"=>"ปี 2 ");
-    $sType[] = array("id"=>3, "name"=>"ปี 3");
-    $sType[] = array("id"=>4, "name"=>"ปี 4");
-    $sType[] = array("id"=>5, "name"=>"ศิษย์เก่า");
+    $sYear[] = array("id"=>1, "name"=>"ปี 1 ");
+    $sYear[] = array("id"=>2, "name"=>"ปี 2 ");
+    $sYear[] = array("id"=>3, "name"=>"ปี 3");
+    $sYear[] = array("id"=>4, "name"=>"ปี 4");
+    $sYear[] = array("id"=>5, "name"=>"ศิษย์เก่า");
     ?>
     <select class="form-control" id="stu_level" name="stu_level">
       <option value="">-- เลือกชั้นปี --</option>
       <?php
-      foreach($sType as $type){
+      foreach($sYear as $year){
         $sel = "";
-        if( !empty($res["stu_level"]) ){
-          if( $res["stu_level"] == $type["id"] )
+        if( !empty($_GET["stu_level"]) ){
+          if( $_GET["stu_level"] == $year["id"] )
           $sel = 'selected';
         }
         ?>
-        <option <?=$sel?> value="<?=$type["id"]?>"><?=$type["name"]?></option>
+        <option <?=$sel?> value="<?=$year["id"]?>"><?=$year["name"]?></option>
         <?php
       }
       ?>
@@ -120,3 +132,15 @@ $query=$sql->select();
 //FOOTER
 include("../layouts/footer.php");
 ?>
+<script>
+$(".filter").change(function(){
+  var stu_level = $("[name=stu_level]").val();
+
+  if( stu_level == "" ){
+    window.location.href = "<?=URL?>users/stu_manage.php";
+  }
+  else{
+    window.location.href = "<?=URL?>users/stu_manage.php?stu_level=" + stu_level;
+  }
+});
+</script>

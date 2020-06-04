@@ -60,12 +60,14 @@ include("../layouts/menu.php");
 							<div class="custom-control custom-checkbox">
                             	<input class="custom-control-input" <?=$check?> type="checkbox" id="year<?=$i?>" value="<?=$i?>" name="year[]">
 								<label class="custom-control-label" for="year<?=$i?>"><?= $i==5 ? "ศิษย์เก่า" : "ปี ".$i ?></label>
+								
 							</div>
 						</div>
 						
 						<?php
 						}
 						?>
+						
 						<p class="text-red">*กรณีที่มีการเเปลี่ยนแปลงข้อมูลชั้นปี จะต้องทำการจัดการการเข้าร่วมกิจกรรมของนักศึกษาใหม่ทั้งหมด</p>
 					</div>
                         <div class="float-right">
@@ -107,9 +109,11 @@ include("../layouts/menu.php");
 								<tr class="table-primary text-center">
 									<th width="10%">ลำดับ</th>
 									<th width="20%">รหัสนักศึกษา</th>
-									<th width="35%">ชื่อ-นามสกุล</th>
-									<th width="15%">ชั้นปี</th>
+									<th width="30%">ชื่อ-นามสกุล</th>
+									<th width="10%">ชั้นปี</th>
 									<th width="20%">จัดการ</th>
+									<th width="10%">ลบ</th>
+									
 								</tr>
 							</thead>
 							<tbody>
@@ -142,6 +146,7 @@ include("../layouts/menu.php");
 											</div>
 										</div>
 									</td>
+									<td class="text-center"><a onclick="return confirm('ต้องการลบข้อมูลนี้ใช่หรือไม่')" href="<?=URL?>activity/delete_activity.php?id=<?php echo $res["ac_id"];?>" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
 								</tr>
 								<?php $no++; } ?>
 							</tbody>
@@ -150,12 +155,13 @@ include("../layouts/menu.php");
 					<div class="card-footer">
 					
 						<div class="clearfix">
-							
-							<button class="btn btn-warning float-left text-white" type="reset"><i class="fas fa-eraser"></i> ยกเลิก</button>
-							<button type="submit" class="btn btn-primary btn-submit float-right">
-								<i class="fa fa-save"></i> บันทึก
-							</button>
+						<a href="<?=URL?>/activity/activitymanage.php" class="btn btn-success">ย้อนกลับ</a>
+						<div  class="nav-item dropdown float-right">
+						<button  class="btn btn-warning  text-white"  type="reset" ><i class="fas fa-eraser"></i> ยกเลิก</button>&nbsp;
+						<button type="submit" class="btn btn-primary btn-submit "><i class="fa fa-save"></i> บันทึก</button>
 						</div>
+						</div>
+						
 					</div>
 					<input type="hidden" name="ac_id" value="<?=$activity["ac_id"]?>">
 				</form>

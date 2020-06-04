@@ -88,3 +88,26 @@ $query=$sql->select();
 //FOOTER
 include("../layouts/footer.php");
 ?>
+<script>
+  $(".filter").change(function(){
+    var ac_type_id = $("[name=ac_type_id]").val();
+    var ac_status = $("[name=ac_status]").val();
+
+    var path = '';
+    if( ac_type_id != "" ){
+      path += path == "" ? "?" : "&";
+      path += "ac_type_id=" + ac_type_id;
+    }
+    if( ac_status != "" ){
+      path += path == "" ? "?" : "&";
+      path += "ac_status=" + ac_status;
+    }
+
+    if( path == "" ){
+      window.location.href = "<?=URL?>activity/activitymanage.php";
+    }
+    else{
+      window.location.href = "<?=URL?>activity/activitymanage.php" + path;
+    }
+  });
+</script>
