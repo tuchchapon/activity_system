@@ -11,7 +11,7 @@
 		<!-- Notifications Dropdown Menu -->
 		<li class="nav-item dropdown">
 			<a class="btn btn-primary" href="#">Profile</a>
-			<a class="btn btn-danger" href="<?=URL?>logout.php" onclick="return confirm('คุณต้องการออกจากระบบใช่หรือไม่ ?');">Logout</a>
+			<a class="btn btn-danger" href="<?= URL ?>logout.php" onclick="return confirm('คุณต้องการออกจากระบบใช่หรือไม่ ?');">Logout</a>
 		</li>
 		<!-- <li class="nav-item">
 			<a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">

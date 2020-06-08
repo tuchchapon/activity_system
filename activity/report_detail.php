@@ -44,35 +44,7 @@ include("../layouts/menu.php");
             </div>
             <div class="card">
 				<form class="form-submit" action="<?=URL?>activity/reload_stu.php" method="POST">
-					<div class="card-body">
-						<div class="float-left">
-						<?php
-						for($i=1; $i<=5; $i++){
-							$check = '';
-							$sql->table = "ac_stu_status";
-							$sql->condition = "WHERE ac_id={$_GET["id"]} AND year_stu='{$i}'";
-							$query = $sql->select();
-							if( mysqli_fetch_assoc($query) > 0 ){
-								$check = 'checked';
-							}
-						?>
-                        <div class="form-check form-check-inline">
-							<div class="custom-control custom-checkbox">
-                            	<input class="custom-control-input" <?=$check?> type="checkbox" id="year<?=$i?>" value="<?=$i?>" name="year[]">
-								<label class="custom-control-label" for="year<?=$i?>"><?= $i==5 ? "ศิษย์เก่า" : "ปี ".$i ?></label>
-								
-							</div>
-						</div>
-						
-						<?php
-						}
-						?>
-						
-						<p class="text-red">*กรณีที่มีการเเปลี่ยนแปลงข้อมูลชั้นปี จะต้องทำการจัดการการเข้าร่วมกิจกรรมของนักศึกษาใหม่ทั้งหมด</p>
-					</div>
-                        <div class="float-right">
-                            <button type="submit" class="btn btn-success"><i class="fas fa-sync"></i> ปรับข้อมูล</button>
-                        </div>
+
                     </div>
                     <input type="hidden" name="id" value="<?=$activity["ac_id"]?>">
 				</form>
@@ -109,10 +81,10 @@ include("../layouts/menu.php");
 								<tr class="table-primary text-center">
 									<th width="10%">ลำดับ</th>
 									<th width="20%">รหัสนักศึกษา</th>
-									<th width="30%">ชื่อ-นามสกุล</th>
+									<th width="40%">ชื่อ-นามสกุล</th>
 									<th width="10%">ชั้นปี</th>
-									<th width="20%">จัดการ</th>
-									<th width="10%">ลบ</th>
+									<th width="20%">การเข้าร่วม</th>
+
 									
 								</tr>
 							</thead>
@@ -132,21 +104,23 @@ include("../layouts/menu.php");
 									<td class="text-center"><?=$result["stu_code"]?></td>
 									<td><?=$result["stu_name"]?></td>
 									<td class="text-center"><?= $result["year_stu"] == 5 ? "ศิษย์เก่า" : "ปี ".$result["year_stu"] ?></td>
-									<td class="text-center">
-										<div class="form-check form-check-inline">
-											<div class="custom-control custom-radio">
-                            					<input class="custom-control-input" <?=$result["status"] == 1 ? "checked" : ""?> type="radio" id="status1_<?=$result["stu_id"]?>" value="1" name="status[<?=$result["stu_id"]?>]">
-												<label class="custom-control-label text-success" for="status1_<?=$result["stu_id"]?>">เข้าร่วม</label>
-											</div>
-										</div>
-										<div class="form-check form-check-inline">
-											<div class="custom-control custom-radio">
-                            					<input class="custom-control-input" <?=$result["status"] == 2 ? "checked" : ""?> type="radio" id="status2_<?=$result["stu_id"]?>" value="2" name="status[<?=$result["stu_id"]?>]">
-												<label class="custom-control-label text-danger" for="status2_<?=$result["stu_id"]?>">ไม่เข้าร่วม</label>
-											</div>
-										</div>
-									</td>
-									<td class="text-center"><a onclick="return confirm('ต้องการลบข้อมูลนี้ใช่หรือไม่')" href="<?=URL?>activity/del_stu_ac.php?ac_id=<?php echo $result["ac_id"];?>&stu_id=<?php echo $result["stu_id"];?>" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
+									<td class="text-center">                                   
+                  
+                                            <?php 
+                                            if($result["status"] == 0){
+                                                echo '<a class="btn btn-sm">รอผล</a>';
+                                            }
+                                            if($result["status"] == 1){
+                                                echo '<a class="btn btn-success btn-sm text-white">เข้าร่วม</a>';
+                                            } 
+                                            if($result["status"] == 2){
+                                                echo '<a class="btn btn-danger btn-sm text-white">ไม่เข้าร่วม</a>';
+                                            }
+                                            ?>
+                
+                                    </td>
+
+								
 								</tr>
 								<?php $no++; } ?>
 							</tbody>
@@ -155,11 +129,8 @@ include("../layouts/menu.php");
 					<div class="card-footer">
 					
 						<div class="clearfix">
-						<a href="<?=URL?>/activity/activitymanage.php" class="btn btn-success">ย้อนกลับ</a>
-						<div  class="nav-item dropdown float-right">
-						<button  class="btn btn-warning  text-white"  type="reset" ><i class="fas fa-eraser"></i> ยกเลิก</button>&nbsp;
-						<button type="submit" class="btn btn-primary btn-submit "><i class="fa fa-save"></i> บันทึก</button>
-						</div>
+						<a href="<?=URL?>/activity/activity_report.php" class="btn btn-success">ย้อนกลับ</a>
+
 						</div>
 						
 					</div>
@@ -179,10 +150,10 @@ $(".filter").change(function(){
   var year = $("[name=year]").val();
 
   if( year == "" ){
-    window.location.href = "<?=URL?>activity/activity_stu_manage.php?id=<?=$_GET["id"]?>";
+    window.location.href = "<?=URL?>activity/report_detail.php?id=<?=$_GET["id"]?>";
   }
   else{
-    window.location.href = "<?=URL?>activity/activity_stu_manage.php?id=<?=$_GET["id"]?>&year=" + year;
+    window.location.href = "<?=URL?>activity/report_detail.php?id=<?=$_GET["id"]?>&year=" + year;
   }
 });
 </script>

@@ -23,4 +23,3 @@ else{
     $location = URL."news/newsmanage.php";
 }
 include("../layouts/footer.php");
-?>
