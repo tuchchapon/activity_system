@@ -1,33 +1,38 @@
-<?php
-// HEADER
-include("layouts/header.php");
-
-//NAVBAR
-include("layouts/navbar.php");
-
-//MENU
-include("layouts/menu.php");
-?>
-<!-- Content -->
-<div class="content-wrapper">
-  <div class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1 class="m-0 text-dark">Dashboard</h1>
-        </div>
-      </div>
-    </div>
+<?php include("header.php"); ?>
+<link href='packages/core/main.css' rel='stylesheet' />
+<link href='packages/daygrid/main.css' rel='stylesheet' />
+<link href='packages/bootstrap/main.css' rel='stylesheet' />
+<main id="main">
+  <div class="container">
+    <div id="calendar" class="m-4"></div>
   </div>
+</main>
 
-  <section class="content">
-    <div class="container-fluid">
-
-    </div>
-  </section>
-</div>
-<!-- End Content -->
-<?php
-//FOOTER
-include("layouts/footer.php");
-?>
+<?php include("footer.php"); ?>
+<script src='packages/core/main.js'></script>
+<script src='packages/daygrid/main.js'></script>
+<script src='packages/bootstrap/main.js'></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      timeZone: 'local',
+      plugins: ['dayGrid'],
+      locale: 'th',
+      events: 'calendar.php',
+      header: {
+        left: 'today',
+        center: 'title',
+        right: 'prev,next'
+      },
+      buttonText: {
+        today: 'วันนี้',
+        month: 'เดือน',
+        week: 'สัปดาห์',
+        day: 'วัน',
+        list: 'รายการ'
+      }
+    });
+    calendar.render();
+  });
+</script>

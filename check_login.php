@@ -12,7 +12,7 @@
 	{
 			$_SESSION["admin_id"] = $objResult["user_id"];
 			session_write_close();
-			header("location:index.php");
+			header("location:".URL."index.php");
 	}
 	mysqli_close($conn);
 ?>

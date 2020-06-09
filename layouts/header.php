@@ -1,4 +1,10 @@
 <?php include($_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . "adminlte" . DIRECTORY_SEPARATOR . "config.php"); ?>
+<?php
+##check Login
+if( empty($_SESSION["admin_id"]) ){
+  header("location:".URL."login.php");
+}
+?>
 <!DOCTYPE html>
 <html>
 

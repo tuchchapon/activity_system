@@ -22,8 +22,3 @@ define('PLUGINS', URL . 'public/plugins/');
 ## SQLi Manager And DB ##
 include( ROOT.DS."SQLiManager.php" );
 $sql = new SQLiManager();
-
-##check Login
-if( empty($_SESSION["admin_id"]) ){
-    header("location:".URL."login.php");
-}

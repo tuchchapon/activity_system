@@ -32,7 +32,7 @@ $query = $sql->select();
   <section class="content">
     <div class="card p-3">
       <div class="container-fluid">
-        <table class="table table-bordered">
+        <table class="table table-bordered datatable">
           <thead>
             <tr class="text-center table-info">
               <th width="10%">#</th>
