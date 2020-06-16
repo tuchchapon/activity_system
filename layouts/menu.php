@@ -78,14 +78,14 @@
 						</p>
 					</a>
 				</li>
-				<li class="nav-item">
+<?php /*				<li class="nav-item">
 					<a href="<?= URL ?>users/adminmanage.php" class="nav-link">
 						<i class="nav-icon fas fa-users-cog"></i>
 						<p>จัดการผู้ดูแลระบบ
 
 						</p>
 					</a>
-				</li>
+				</li>*/?>
 				<li class="nav-header">รายงาน</li>
 				<li class="nav-item">
 					<a href="<?= URL ?>activity/activity_report.php" class="nav-link">

@@ -13,8 +13,8 @@ include("config.php");
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="img/unnamed.png" rel="icon">
+    <link href="img/unnamed.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Muli:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -31,6 +31,9 @@ include("config.php");
 
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
+
+    <!-- DataTable -->
+    <link rel="stylesheet" href="<?= PLUGINS ?>datatables-bs4/css/dataTables.bootstrap4.css">
 
     <!-- =======================================================
   * Template Name: Flattern - v2.0.1
@@ -52,38 +55,46 @@ include("config.php");
 
             <nav class="nav-menu d-none d-lg-block">
                 <ul>
-                    <li class="active"><a href="index.php">Home</a></li>
-                    <li class="drop-down"><a href="">กิจกรรม</a>
+                    <li class=""><a href="index.php">Home</a></li>
+                    <li class="drop-down"><a href="event_calendar.php">กิจกรรม</a>
                         <ul>
-                            <li><a href="#">Drop Down 1</a></li>
-                            <li><a href="#">Drop Down 2</a></li>
-                            <li><a href="#">Drop Down 3</a></li>
-                            <li><a href="#">Drop Down 4</a></li>
-                            <li><a href="#">Drop Down 5</a></li>
+                            <?php
+                            $sql->table = "ac_type";
+                            $sql->condition = "";
+                            $query = $sql->select();
+                            while ($result = mysqli_fetch_assoc($query)) {
+                            ?>
+                                <li><a href="event_calendar.php?type=<?= $result["ac_type_id"] ?>"><?= $result["ac_type_name"] ?></a></li>
+                            <?php
+                            }
+                            ?>
                         </ul>
                     </li>
-                    <li class="drop-down"><a href="">ข่าวสาร</a>
+                    <li class="drop-down"><a href="news.php">ข่าวสาร</a>
                         <ul>
-                            <li><a href="#">Drop Down 1</a></li>
-                            <li><a href="#">Drop Down 2</a></li>
-                            <li><a href="#">Drop Down 3</a></li>
-                            <li><a href="#">Drop Down 4</a></li>
-                            <li><a href="#">Drop Down 5</a></li>
+                            <?php
+                            $sql->table = "news_type";
+                            $sql->condition = "";
+                            $query = $sql->select();
+                            while ($result = mysqli_fetch_assoc($query)) {
+                            ?>
+                                <li><a href="news.php?type=<?= $result["news_type_id"] ?>"><?= $result["news_type_name"] ?></a></li>
+                            <?php
+                            }
+                            ?>
                         </ul>
                     </li>
-                    <li><a href="about.html">ข่าวสาร</a></li>
                     <li><a href="about.html">ข้อมูลสาขา</a></li>
-                    <?php 
-                    if( empty($_SESSION["admin_id"]) ){
-                        ?>
+                    <?php
+                    if (empty($_SESSION["admin_id"])) {
+                    ?>
                         <li><a href="login.php">LOGIN</a></li>
-                        <?php
-                    }
-                    else{
-                        ?>
-                        <li><a href="<?=URL?>activity/activitymanage.php">จัดการระบบ</a></li>
-                        <li><a href="<?=URL?>logout.php" onClick="return confirm('คุณต้องการอแอกจากระบบ ใช่หรือไม่ ?')">ออกจากระบบ</a></li>
-                        <?php
+                    <?php
+                    } else {
+                    ?>
+                        <li><a href="<?= URL ?>activity/activitymanage.php"><i class="fas fa-cogs"></i> จัดการระบบ</a></li>
+                        <li><a href="<?= URL ?>logout.php" onClick="return confirm('คุณต้องการอแอกจากระบบ ใช่หรือไม่ ?')"><i class="fas fa-user-times"></i> ออกจากระบบ</a></li>
+                    <?php
                     }
                     ?>
                 </ul>

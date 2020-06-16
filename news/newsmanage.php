@@ -92,8 +92,9 @@ $query = $sql->select();
                   <td><?php echo $res["news_title"]; ?></td>
                   <td class="text-center"><?php echo $res["news_create"]; ?></td>
                   <td class="text-center">
-                    <a href="<?= URL ?>news/input_news.php?id=<?php echo $res["news_id"]; ?>" class="btn btn-warning">แก้ไข</a>
-                    <a onclick="return confirm('ต้องการลบข้อมูลนี้ใช่หรือไม่')" href="<?= URL ?>news/delete_news.php?id=<?php echo $res["news_id"]; ?>" class="btn btn-danger">ลบ</a>
+                  <a href="<?= URL ?>news/news_image.php?id=<?php echo $res["news_id"]; ?>" class="btn btn-success"><i class="fa fa-image"></i></a>
+                    <a href="<?= URL ?>news/input_news.php?id=<?php echo $res["news_id"]; ?>" class="btn btn-warning"><i class="fa fa-pen"></i></a>
+                    <a onclick="return confirm('ต้องการลบข้อมูลนี้ใช่หรือไม่')" href="<?= URL ?>news/delete_news.php?id=<?php echo $res["news_id"]; ?>" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                   </td>
                 </tr>
               <?php } ?>

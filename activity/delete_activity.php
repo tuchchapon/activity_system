@@ -1,4 +1,4 @@
-<?php
+   <?php
 // HEADER
 include("../layouts/header.php");
 

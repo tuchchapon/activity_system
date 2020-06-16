@@ -1,8 +1,8 @@
-<?php include($_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . "adminlte" . DIRECTORY_SEPARATOR . "config.php"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . "activity_system" . DIRECTORY_SEPARATOR . "config.php"); ?>
 <?php
 ##check Login
-if( empty($_SESSION["admin_id"]) ){
-  header("location:".URL."login.php");
+if (empty($_SESSION["admin_id"])) {
+  header("location:" . URL . "login.php");
 }
 ?>
 <!DOCTYPE html>
@@ -14,6 +14,9 @@ if( empty($_SESSION["admin_id"]) ){
   <title>AdminLTE 3 | Dashboard</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Favicons -->
+  <link href="<?=URL?>img/unnamed.png" rel="icon">
+  <link href="<?=URL?>img/unnamed.png" rel="apple-touch-icon">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="<?= PLUGINS ?>fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
