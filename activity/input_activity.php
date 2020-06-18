@@ -61,7 +61,7 @@ if( !empty($_POST) ){
     <form  method="POST">
   <div class="form-group" method="POST">
     <label for="ac_title">หัวข้อกิจกรรม</label>
-    <input type="type" class="form-control" id="ac_title" name="ac_title" placeholder="หัวข้อกิจกรรม"value="<?php echo !empty($res["ac_title"]) ? $res["ac_title"] : "" ?>">
+    <input type="type" class="form-control" pattern="^[A-Za-zก-๏\s]+$" id="ac_title" name="ac_title" placeholder="หัวข้อกิจกรรม"value="<?php echo !empty($res["ac_title"]) ? $res["ac_title"] : "" ?>">
   </div>
   <div class="form-group" method="POST">
     <label for="year_stu">ปีการศึกษา</label>

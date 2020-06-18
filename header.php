@@ -70,7 +70,7 @@ include("config.php");
                             ?>
                         </ul>
                     </li>
-                    <li class="drop-down"><a href="news.php">ข่าวสาร</a>
+                    <li class="drop-down"><a href="show_news.php">ข่าวสาร</a>
                         <ul>
                             <?php
                             $sql->table = "news_type";
@@ -78,7 +78,7 @@ include("config.php");
                             $query = $sql->select();
                             while ($result = mysqli_fetch_assoc($query)) {
                             ?>
-                                <li><a href="news.php?type=<?= $result["news_type_id"] ?>"><?= $result["news_type_name"] ?></a></li>
+                                <li><a href="show_news.php?type=<?= $result["news_type_id"] ?>"><?= $result["news_type_name"] ?></a></li>
                             <?php
                             }
                             ?>

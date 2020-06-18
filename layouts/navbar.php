@@ -10,7 +10,7 @@
 	<ul class="navbar-nav ml-auto">
 		<!-- Notifications Dropdown Menu -->
 		<li class="nav-item dropdown">
-			<a class="btn btn-primary" href="#">Profile</a>
+			<a class="btn btn-primary" href="<?= URL ?>index.php"onclick="return confirm('กลับไปที่หน้าแสดงข้อมูล ?');">back</a>
 			<a class="btn btn-danger" href="<?= URL ?>logout.php" onclick="return confirm('คุณต้องการออกจากระบบใช่หรือไม่ ?');">Logout</a>
 		</li>
 		<!-- <li class="nav-item">
