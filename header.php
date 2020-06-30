@@ -55,7 +55,8 @@ include("config.php");
 
             <nav class="nav-menu d-none d-lg-block">
                 <ul>
-                    <li class=""><a href="index.php">Home</a></li>
+                    <li class=""><a href="index.php">หน้าแรก</a></li>
+                    <li class=""><a href="ac_calendar.php">ปฎิทินกิจกรรม</a></li>
                     <li class="drop-down"><a href="event_calendar.php">กิจกรรม</a>
                         <ul>
                             <?php
