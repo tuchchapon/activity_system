@@ -22,7 +22,7 @@ if( !empty($_GET["id"]) ){
 if( !empty($_POST) ){
   $sql->table= "activity";
   if( !empty($_POST["id"]) ){
-    $sql->value="ac_title='{$_POST["ac_title"]}', year_stu='{$_POST["year_stu"]}', ac_start='{$_POST["ac_start"]}',ac_end='{$_POST["ac_end"]}',ac_type_id='{$_POST["ac_type_id"]}',ac_status='{$_POST["ac_status"]}',ac_detail='{$_POST["ac_detail"]}'";
+    $sql->value="ac_title='{$_POST["ac_title"]}',ac_location='{$_POST["ac_location"]}', year_stu='{$_POST["year_stu"]}', ac_start='{$_POST["ac_start"]}',ac_end='{$_POST["ac_end"]}',ac_type_id='{$_POST["ac_type_id"]}',ac_status='{$_POST["ac_status"]}',ac_detail='{$_POST["ac_detail"]}'";
     $sql->condition="WHERE ac_id={$_POST["id"]}";
     if( $sql->update() ){
       $alert = "แก้ไขข้อมูลเรียบร้อยแล้ว";
@@ -34,7 +34,7 @@ if( !empty($_POST) ){
   }
   else{
     $sql->field= "ac_title,year_stu,ac_start,ac_end,ac_type_id,ac_status,ac_detail";
-    $sql->value= "'{$_POST["ac_title"]}','{$_POST["year_stu"]}','{$_POST["ac_start"]}','{$_POST["ac_end"]}','{$_POST["ac_type_id"]}','{$_POST["ac_status"]}','{$_POST["ac_detail"]}'";
+    $sql->value= "'{$_POST["ac_title"]}','{$_POST["ac_location"]}','{$_POST["year_stu"]}','{$_POST["ac_start"]}','{$_POST["ac_end"]}','{$_POST["ac_type_id"]}','{$_POST["ac_status"]}','{$_POST["ac_detail"]}'";
     if( $sql->insert() ){
         $alert = "บันทึกข้อมูลเรียบร้อยแล้ว";
         $location = URL."activity/activitymanage.php";
@@ -58,20 +58,31 @@ if( !empty($_POST) ){
     </div>
 
     <section class="content">
-    <form  method="POST">
+    <form  method="POST" class="form-submit">
   <div class="form-group" method="POST">
     <label for="ac_title">หัวข้อกิจกรรม</label>
-    <input type="type" class="form-control" pattern="^[A-Za-zก-๏\s]+$" id="ac_title" name="ac_title" placeholder="หัวข้อกิจกรรม"value="<?php echo !empty($res["ac_title"]) ? $res["ac_title"] : "" ?>">
+    <input type="text" class="form-control"  id="ac_title" name="ac_title" placeholder="หัวข้อกิจกรรม"value="<?php echo !empty($res["ac_title"]) ? $res["ac_title"] : "" ?>">
+    <message class="text-red"></message>
+  </div>
+  <div class="form-group" method="POST">
+    <label for="ac_location">สถานที่จัดกิจกรรม</label>
+    <input type="text" class="form-control"  id="ac_location" name="ac_location" placeholder="สถานที่จัดกิจกรรม"value="<?php echo !empty($res["ac_location"]) ? $res["ac_location"] : "" ?>">
+    <message class="text-red"></message>
   </div>
   <div class="form-group" method="POST">
     <label for="year_stu">ปีการศึกษา</label>
-    <input type="type" class="form-control" id="year_stu" name="year_stu" placeholder="ปีการศึกษา"value="<?php echo !empty($res["year_stu"]) ? $res["year_stu"] : "" ?>">
-  </div>  <div class="form-group" method="POST">
-    <label for="ac_start">วันที่เริ่มต้น(เดือน/วัน/ปี)</label>
+    <input type="number" class="form-control" id="year_stu" name="year_stu" placeholder="ปีการศึกษา"value="<?php echo !empty($res["year_stu"]) ? $res["year_stu"] : "" ?>">
+    <message class="text-red"></message>
+  </div>  
+  <div class="form-group" method="POST">
+    <label for="ac_start">วันที่เริ่มต้น</label>
     <input type="date" class="form-control" id="ac_start" name="ac_start" placeholder="วันที่เริ่มต้น"value="<?php echo !empty($res["ac_start"]) ? $res["ac_start"] : "" ?>">
-  </div>  <div class="form-group" method="POST">
-    <label for="ac_end">วันที่สิ้นสุด(เดือน/วัน/ปี)</label>
+    <message class="text-red"></message>  
+  </div>  
+  <div class="form-group" method="POST">
+    <label for="ac_end">วันที่สิ้นสุด</label>
     <input type="date" class="form-control" id="ac_end" name="ac_end" placeholder="วันที่สิ้นสุด"value="<?php echo !empty($res["ac_end"]) ? $res["ac_end"] : "" ?>">
+    <message class="text-red"></message>  
   </div>
   <div class="form-group">
     <label for="ac_status">สถานะกิจกรรม</label>
@@ -95,6 +106,7 @@ if( !empty($_POST) ){
       }
       ?>
     </select>
+    <message class="text-red"></message>  
   </div>
   <div class="form-group">
     <label for="ac_type">ประเภทกิจกรรม</label>
@@ -118,12 +130,13 @@ if( !empty($_POST) ){
       }
       ?>
     </select>
+    <message class="text-red"></message>  
   </div>
 
   <div class="form-group">
     <label for="ac_detail">รายละเอียดกิจกรรม</label>
     <textarea class="form-control textarea"COLS=50 ROWS=6 id="ac_detail" name="ac_detail" placeholder="รายละเอียดกิจกรรม"><?php echo !empty($res["ac_detail"]) ? $res["ac_detail"] : "" ?></textarea>
-   
+    <message class="text-red"></message>  
   </div>
   <?php 
   if( !empty($res) ){
@@ -139,3 +152,137 @@ if( !empty($_POST) ){
 //FOOTER
 include("../layouts/footer.php");
 ?>
+<script language="javascript">
+    // function check() {
+    //   if (ac_title.ac_title.value == "") {
+    //     alert('กรุณากรอกชื่อกิจกรรม')
+    //     ac_title.ac_title.focus()
+    //     return false
+    //   }
+
+    //   else if(document.ac_title.ac_title.value.length <2) {
+    //     alert("กรอกชื่อกิจกรรมมากกว่า 2 ตัวอักษร");
+    //     document.ac_title.ac_title.focus() ;
+    //     return false;
+    //   }
+    //   if (year_stu.year_stu.value == "") {
+    //     alert('กรุณากรอกปีการศึกษา')
+    //     year_stu.year_stu.focus()
+    //     return false
+    //   }
+
+    //   else if(document.year_stu.year_stu.value.length <4) {
+    //     alert("กรอกปีการศึกษา 4 ตัวอักษร");
+    //     document.year_stu.year_stu.focus() ;
+    //     return false;
+    //   }
+      
+
+    // }
+
+    $(".form-submit").submit(function(){
+      var $error = false;
+      if( $(this).find("[name=ac_title]").val() == "" ){
+        $div = $(this).find("[name=ac_title]").closest('div');
+        $div.find('message').text( 'กรุณากรอกชื่อกิจกรรม' ); 
+        $error = true;
+      }
+      if( $(this).find("[name=ac_location]").val() == "" ){
+        $div = $(this).find("[name=ac_location]").closest('div');
+        $div.find('message').text( 'กรุณากรอกสถานที่' ); 
+        $error = true;
+      }
+      if( $(this).find("[name=year_stu]").val() == "" ){
+        $div = $(this).find("[name=year_stu]").closest('div');
+        $div.find('message').text( 'กรุณากรอกปีการศึกษา' ); 
+        $error = true;
+      }
+      if( $(this).find("[name=ac_start]").val() == "" ){
+        $div = $(this).find("[name=ac_start]").closest('div');
+        $div.find('message').text( 'กรุณากรอกวันที่เริ่มต้น' ); 
+        $error = true;
+      }
+      if( $(this).find("[name=ac_end]").val() == "" ){
+        $div = $(this).find("[name=ac_end]").closest('div');
+        $div.find('message').text( 'กรุณากรอกวันที่สิ้นสุด' ); 
+        $error = true;
+      }
+      if( $(this).find("[name=ac_status]").val() == "" ){
+        $div = $(this).find("[name=ac_status]").closest('div');
+        $div.find('message').text( 'กรุณาเลือกสถานะ' ); 
+        $error = true;
+      }
+      if( $(this).find("[name=ac_type_id]").val() == "" ){
+        $div = $(this).find("[name=ac_type_id]").closest('div');
+        $div.find('message').text( 'กรุณาเลือกประเภทกิจกรรม' ); 
+        $error = true;
+      }
+      if( $(this).find("[name=ac_detail]").val() == "" ){
+        $div = $(this).find("[name=ac_detail]").closest('div');
+        $div.find('message').text( 'กรุณากรอกรายละเอียด' ); 
+        $error = true;
+      }
+
+      if( $(this).find("[name=year_stu]").val() != "" ){
+        if( $(this).find("[name=year_stu]").length >= 4 ){
+          $div = $(this).find("[name=year_stu]").closest('div');
+          $div.find('message').text( 'ปีการศึกษา ต้องมีความยาวไม่น้อยกว่า 4 ตัวอักษร' ); 
+          $error = true;
+        }
+      }
+        if( $(this).find("[name=year_stu]").val() != "" ){
+        if( $(this).find("[name=year_stu]").length <= 4 ){
+          $div = $(this).find("[name=year_stu]").closest('div');
+          $div.find('message').text( 'ปีการศึกษา ต้องมีความยาวไม่เกิน 4 ตัวอักษร' ); 
+          $error = true;
+        }
+      }
+      if( $(this).find("[name=ac_start]").val() != "" && $(this).find("[name=ac_end]").val() != "" ){
+        if( $(this).find("[name=ac_start]").val() > $(this).find("[name=ac_end]").val() ){
+          $div = $(this).find("[name=ac_start]").closest('div');
+          $div.find('message').text( 'กรุณากรอกข้อมูลวันที่ให้ถูกต้อง' ); 
+
+          $div = $(this).find("[name=ac_end]").closest('div');
+          $div.find('message').text( 'กรุณากรอกข้อมูลวันที่ให้ถูกต้อง' ); 
+          $error = true;
+        }
+      }
+
+      if( $error ){
+        return false;
+      }
+    });
+
+    $("[name=ac_title]").change(function(){
+      $div = $(this).closest('div');
+      $div.find('message').text(''); 
+    });
+    $("[name=ac_location]").change(function(){
+      $div = $(this).closest('div');
+      $div.find('message').text(''); 
+    });
+    $("[name=year_stu]").change(function(){
+      $div = $(this).closest('div');
+      $div.find('message').text(''); 
+    });
+    $("[name=ac_start]").change(function(){
+      $div = $(this).closest('div');
+      $div.find('message').text(''); 
+    });
+    $("[name=ac_end]").change(function(){
+      $div = $(this).closest('div');
+      $div.find('message').text(''); 
+    });
+    $("[name=ac_status]").change(function(){
+      $div = $(this).closest('div');
+      $div.find('message').text(''); 
+    });
+    $("[name=ac_type_id]").change(function(){
+      $div = $(this).closest('div');
+      $div.find('message').text(''); 
+    });
+    $("[name=ac_detail]").change(function(){
+      $div = $(this).closest('div');
+      $div.find('message').text(''); 
+    });
+  </script>

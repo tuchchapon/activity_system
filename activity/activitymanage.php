@@ -73,7 +73,7 @@ $query = $sql->select();
             $sType[] = array("id" => 3, "name" => "ยังไม่กำหนด");
             ?>
             <select class="form-control" id="ac_status" name="ac_status" style="width:170px;">
-              <option value="">-- เลือกประเภท --</option>
+              <option value="">-- เลือกสถานะ --</option>
               <?php
               foreach ($sType as $type) {
                 $sel = "";
@@ -101,12 +101,13 @@ $query = $sql->select();
         <table class="table table-bordered datatable">
           <thead>
             <tr class="text-center table-info">
-              <th width="10%">ลำดับ</th>
-              <th width="10%">ประเภทกิจกรรม</th>
-              <th width="30%">หัวข้อกิจกรรม</th>
-              <th width="10%">ปีการศึกษา</th>
+              <th width="5%">ลำดับ</th>
+              <th width="5%">ประเภทกิจกรรม</th>
+              <th width="20%">หัวข้อกิจกรรม</th>
+              <th width="15%">สถานที่</th>
+              <th width="5%">ปีการศึกษา</th>
               <th width="10%">สถานะกิจกรรม</th>
-              <th width="10%">วันที่</th>
+              <th width="20%">วันที่จัดกิจกรรม</th>
               <th width="20%">จัดการ</th>
             </tr>
           </thead>
@@ -121,12 +122,16 @@ $query = $sql->select();
                 <td class="text-center"><?php echo $num; ?></td>
                 <td><?php echo $res["ac_type_name"]; ?></td>
                 <td><?php echo $res["ac_title"]; ?></td>
+                <td><?php echo $res["ac_location"]; ?></td>
                 <td><?php echo $res["year_stu"]; ?></td>
                 <td class="text-center"><?php
                                         if ($res["ac_status"] == 1) {
                                           $color = 'red';
                                           $ac_status = 'กำลังจะมาถึง';
                                         } else if ($res["ac_status"] == 2) {
+                                          $color = 'blue';
+                                          $ac_status = 'กำลังดำเนินการ';
+                                        } else if ($res["ac_status"] == 3) {
                                           $color = 'green';
                                           $ac_status = 'ผ่านไปแล้ว';
                                         } else {
@@ -135,7 +140,9 @@ $query = $sql->select();
                                         }; ?>
                   <label style="color:<?= $color ?>"><?= $ac_status ?></label>
                 </td>
-                <td class="text-center"><?php echo $res["created"]; ?></td>
+                <td class="text-center"> <?= dateTH($res["ac_start"]) ?> <?php if ($res["ac_start"] != $res["ac_end"]) {
+                                                                          echo " ถึง " . dateTH($res["ac_end"]);
+                                                                        } ?></td>
                 <td class="text-center">
                   <a href="<?= URL ?>activity/activity_stu_manage.php?id=<?php echo $res["ac_id"]; ?>" class="btn btn-primary"><i class="fa fa-users"></i></a>
                   <a href="<?= URL ?>activity/activity_images.php?id=<?php echo $res["ac_id"]; ?>" class="btn btn-success"><i class="fa fa-image"></i></a>

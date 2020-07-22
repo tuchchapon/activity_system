@@ -7,6 +7,8 @@ include("../layouts/navbar.php");
 
 //MENU
 include("../layouts/menu.php");
+
+
 // SET TABLE //
 $sql->table = "ac_type";
 
@@ -57,11 +59,11 @@ if( !empty($_POST) ){
     </div>
 
     <section class="content">
-    <form class="form-inline" method="POST">
+    <form name="formck" class="form-inline" method="POST" onsubmit="return check();" >
 
   <div class="form-group mx-sm-3 mb-2">
     <label for="ac_type_name" class="sr-only">Password</label>
-    <input type="text" class="form-control" id="ac_type_name" name="ac_type_name" placeholder="ประเภทกิจกรรม" value="<?php echo !empty($res["ac_type_name"]) ? $res["ac_type_name"] : "" ?>">
+    <input type="text" pattern="^[A-Za-zก-๏\s]+$" class="form-control" id="ac_type_name" name="ac_type_name" placeholder="ประเภทกิจกรรม" value="<?php echo !empty($res["ac_type_name"]) ? $res["ac_type_name"] : "" ?>">
   </div>
   <?php 
   if( !empty($res) ){
@@ -77,3 +79,19 @@ if( !empty($_POST) ){
 //FOOTER
 include("../layouts/footer.php");
 ?>
+<script language="javascript">
+    function check() {
+      if (formck.ac_type_name.value == "") {
+        alert('กรุณากรอกชื่อประเภทกิจกรรม')
+        formck.ac_type_name.focus()
+        return false
+      }
+
+      else if(document.formck.ac_type_name.value.length <2) {
+        alert("กรอกชื่อประเภทกิจกรรมมากกว่า 2 ตัวอักษร");
+        document.formck.ac_type_name.focus() ;
+        return false;
+      }
+
+    }
+  </script>

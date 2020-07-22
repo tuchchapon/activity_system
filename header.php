@@ -85,7 +85,7 @@ include("config.php");
                             ?>
                         </ul>
                     </li>
-                    <li><a href="about.html">ข้อมูลสาขา</a></li>
+                    <li><a href="about.php">ข้อมูลสาขา</a></li>
                     <?php
                     if (empty($_SESSION["admin_id"])) {
                     ?>

@@ -2,7 +2,7 @@
 	<!-- Brand Logo -->
 	<a href="../index.php" class="brand-link">
 		<img src="<?= IMAGES ?>/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-		<span class="brand-text font-weight-light">AdminLTE 3</span>
+		<span class="brand-text font-weight-light">ระบบจัดการกิจกรรม</span>
 	</a>
 
 	<!-- Sidebar -->
@@ -13,7 +13,7 @@
 				<img src="<?= IMAGES ?>/avatar.png" class="img-circle elevation-2" alt="User Image">
 			</div>
 			<div class="info">
-				<a href="" class="d-block">Administrator</a>
+				<a href="" class="d-block"><?php echo $_SESSION["admin_id"]?></a>
 			</div>
 		</div>
 
@@ -69,6 +69,18 @@
 					</ul>
 				</li>
 
+				<?php 
+				if($_SESSION["Status"] == 'admin'){
+				?>
+				<li class="nav-header">ข้อมูลสาขา</li>
+				<li class="nav-item">
+					<a href="<?= URL ?>webinfo/info.php" class="nav-link">
+						<i class="nav-icon fas fa-print"></i>
+						<p>จัดการข้อมูลสาขาวิชา</p>
+					</a>
+				</li>
+				<?php } ?>
+
 				<li class="nav-header">การจัดการผู้ใช้งาน</li>
 				<li class="nav-item">
 					<a href="<?= URL ?>users/stu_manage.php" class="nav-link">
@@ -78,14 +90,17 @@
 						</p>
 					</a>
 				</li>
-<?php /*				<li class="nav-item">
-					<a href="<?= URL ?>users/adminmanage.php" class="nav-link">
+		<?php	if($_SESSION["Status"] == 'admin'){
+			?>
+				<li class="nav-item">
+					<a href="<?= URL ?>users/admin_manage.php" class="nav-link">
 						<i class="nav-icon fas fa-users-cog"></i>
 						<p>จัดการผู้ดูแลระบบ
-
 						</p>
 					</a>
-				</li>*/?>
+				</li><?php
+			}
+			?>
 				<li class="nav-header">รายงาน</li>
 				<li class="nav-item">
 					<a href="<?= URL ?>activity/activity_report.php" class="nav-link">

@@ -10,7 +10,7 @@
       <tr>
         <td> &nbsp;Username</td>
         <td>
-          <input name="txtUsername" type="text" id="txtUsername">
+          <input name="txtUsername" type="text" id="txtUsername" autocomplete="off">
         </td>
       </tr>
       <tr>  

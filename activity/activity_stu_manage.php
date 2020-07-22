@@ -156,6 +156,7 @@ include("../layouts/menu.php");
 					
 						<div class="clearfix">
 						<a href="<?=URL?>/activity/activitymanage.php" class="btn btn-success">ย้อนกลับ</a>
+						<a href="<?= URL ?>activity/export_excel.php?id=<?php echo $_GET["id"]; ?>" class="btn btn-success">พิมพ์รายชื่อ</a>
 						<div  class="nav-item dropdown float-right">
 						<button  class="btn btn-warning  text-white"  type="reset" ><i class="fas fa-eraser"></i> ยกเลิก</button>&nbsp;
 						<button type="submit" class="btn btn-primary btn-submit "><i class="fa fa-save"></i> บันทึก</button>
