@@ -62,7 +62,7 @@ if (!empty($_POST)) {
       </div>
 
       <div class="form-group">
-        <label for="newstype">Example select</label>
+        <label for="newstype">เลือกประเภทข่าว</label>
         <?php
         $sql->table = "news_type";
         $sql->field = "*";
@@ -86,7 +86,7 @@ if (!empty($_POST)) {
       </div>
 
       <div class="form-group">
-        <label for="news_detail">Example textarea</label>
+        <label for="news_detail">รายละเอียดข่าว</label>
         <textarea class="form-control textarea" rows="6" id="news_detail" placeholder="รายละเอียดข่าว" name="news_detail"><?php echo !empty($res["news_detail"]) ? nl2br($res["news_detail"]) : "" ?></textarea>
 
       </div>

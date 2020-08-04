@@ -6,41 +6,47 @@
   .mySlides {
     display: none;
   }
+
   #calendar {
     width: 100%;
     margin: 0 auto;
     font-size: 10px;
-}
-.fc-header-title h2 {
+  }
+
+  .fc-header-title h2 {
     font-size: .9em;
     white-space: normal !important;
-}
-.fc-view-month .fc-event, .fc-view-agendaWeek .fc-event {
+  }
+
+  .fc-view-month .fc-event,
+  .fc-view-agendaWeek .fc-event {
     font-size: 0;
     overflow: hidden;
     height: 2px;
-}
-.fc-view-agendaWeek .fc-event-vert {
+  }
+
+  .fc-view-agendaWeek .fc-event-vert {
     font-size: 0;
     overflow: hidden;
     width: 2px !important;
-}
-.fc-agenda-axis {
+  }
+
+  .fc-agenda-axis {
     width: 20px !important;
     font-size: .7em;
-}
+  }
 
-.fc-button-content {
+  .fc-button-content {
     padding: 0;
-}
+  }
 </style>
 
 <body>
-<?php
-   $sql->table = "activity a LEFT JOIN ac_type ac ON a.ac_type_id=ac.ac_type_id";
-  //  $sql->condition = $condition." ORDER BY year_stu DESC";
-   $query = $sql->select();
-   ?>
+  <?php
+  $sql->table = "activity a LEFT JOIN ac_type ac ON a.ac_type_id=ac.ac_type_id";
+   $sql->condition = " WHERE ac_status = 1 ORDER BY ac_start ASC limit 3 ";
+  $query = $sql->select();
+  ?>
   <div class="container mt-3">
     <div class="w3-content w3-section">
       <img class="mySlides" src="img/software1.jpg" style="width:100%; height:400px;">
@@ -54,66 +60,69 @@
           <div id="calendar"></div>
         </div>
         <div class="col-md-9">
-          <h3><center>กิจกรรมที่กำลังจะมาถึง</center></h3>
-       
-<main id="main">
-    <div class="container">
-        <div class="m-2">
-        </div>
-        <div class="clearfix">
-            <div class="card p-2 mb-2">
-                <table class="table table-bordered ">
+          <h3>
+            <center>กิจกรรมที่กำลังจะมาถึง</center>
+          </h3>
+
+          <main id="main">
+            <div class="container">
+              <div class="m-2">
+              </div>
+              <div class="clearfix">
+                <div class="card p-2 mb-2">
+                  <table class="table table-bordered ">
                     <thead>
-                        <tr class="text-center table-info">
-                            <th width="5%">ลำดับ</th>
-                            <th width="10%">ประเภท</th>
-                            <th width="30%">หัวข้อกิจกรรม</th>
-                            <th width="15%">ปีการศึกษา</th>
-                            <th width="10%">สถานะ</th>
-                            <th width="20%">วันที่จัด</th>
-                        </tr>
+                      <tr class="text-center table-info">
+                        <th width="5%">ลำดับ</th>
+                        <th width="10%">ประเภท</th>
+                        <th width="30%">หัวข้อกิจกรรม</th>
+                        <th width="20%">สถานะ</th>
+                        <th width="25%">วันที่จัด</th>
+                      </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        $num = 0;
-                        $ac_status = "";
-                        while ($res = mysqli_fetch_assoc($query)) {
-                            $num++;
-                        ?>
-                            <tr>
-                                <td class="text-center"><?php echo $num; ?></td>
-                                <td><?php echo $res["ac_type_name"]; ?></td>
-                                <td><a href="<?=URL?>show_event.php?id=<?=$res["ac_id"]?>"><?php echo $res["ac_title"]; ?></a></td>
-                                <td class="text-center"><?php echo $res["year_stu"]; ?></td>
-                                <td class="text-center"><?php
-                                                        if ($res["ac_status"] == 1) {
-                                                            $color = 'red';
-                                                            $ac_status = 'กำลังจะมาถึง';
-                                                        } else if ($res["ac_status"] == 2) {
-                                                            $color = 'green';
-                                                            $ac_status = 'ผ่านไปแล้ว';
-                                                        } else {
-                                                            $color = 'gray';
-                                                            $ac_status = 'ยังไม่กำหนด';
-                                                        }; ?>
-                                    <label style="color:<?= $color ?>"><?= $ac_status ?></label>
-                                </td>
-                                <td class="text-center">
-                                    <?=dateTH($res["ac_start"])?>
-                                    <?php
-                                    if( $res["ac_start"] != $res["ac_end"] ){
-                                        echo " - ".dateTH($res["ac_end"]);
-                                    }
-                                    ?>
-                                </td>
-                            </tr>
-                        <?php } ?>
+                      <?php
+                      $num = 0;
+                      $ac_status = "";
+                      while ($res = mysqli_fetch_assoc($query)) {
+                        $num++;
+                      ?>
+                        <tr>
+                          <td class="text-center"><?php echo $num; ?></td>
+                          <td><?php echo $res["ac_type_name"]; ?></td>
+                          <td><a href="<?= URL ?>show_event.php?id=<?= $res["ac_id"] ?>"><?php echo $res["ac_title"]; ?></a></td>
+                          <td class="text-center"><?php
+                                                  if ($res["ac_status"] == 1) {
+                                                    $color = 'red';
+                                                    $ac_status = 'กำลังจะมาถึง';
+                                                  } else if ($res["ac_status"] == 2) {
+                                                    $color = 'blue';
+                                                    $ac_status = 'กำลังดำเนินการ';
+                                                  } else if ($res["ac_status"] == 3) {
+                                                    $color = 'green';
+                                                    $ac_status = 'ผ่านไปแล้ว';
+                                                  } else {
+                                                    $color = 'gray';
+                                                    $ac_status = 'ยังไม่กำหนด';
+                                                  }; ?>
+                            <label style="color:<?= $color ?>"><?= $ac_status ?></label>
+                          </td>
+                          <td class="text-center">
+                            <?= dateTH($res["ac_start"]) ?>
+                            <?php
+                            if ($res["ac_start"] != $res["ac_end"]) {
+                              echo " - " . dateTH($res["ac_end"]);
+                            }
+                            ?>
+                          </td>
+                        </tr>
+                      <?php } ?>
                     </tbody>
-                </table>
+                  </table>
+                </div>
+              </div>
             </div>
-        </div>
-    </div>
-</main>
+          </main>
         </div>
       </div>
     </div>

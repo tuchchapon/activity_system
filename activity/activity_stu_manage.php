@@ -7,7 +7,8 @@ if( !empty($_GET["id"]) ){
     $sql->table = "activity a LEFT JOIN ac_type at ON a.ac_type_id=at.ac_type_id";
     $sql->field="*";
     $sql->condition="WHERE ac_id={$_GET["id"]}";
-    $activity = mysqli_fetch_assoc($sql->select());
+	$activity = mysqli_fetch_assoc($sql->select());
+	$time = dateTH($activity["ac_start"])." - ".dateTH($activity["ac_end"]);
   }
   else{
     header("location:".URL."activity/activitymanage.php");
@@ -39,6 +40,7 @@ include("../layouts/menu.php");
 				<label class="ml-3 mt-3"><i class="fas fa-snowboarding"></i> ข้อมูลกิจกรรม</label>
 				<ul>
 					<li><span style="font-weight: bold;">หัวข้อกิจกรรม :</span> <?=$activity["ac_title"]?></li>
+					<li><span style="font-weight: bold;">สถานที่ :</span> <?=$activity["ac_location"]?></li>
 					<li><span style="font-weight: bold;">ประเภท :</span> <?=$activity["ac_type_name"]?></li>
 				</ul>
             </div>
@@ -170,6 +172,7 @@ include("../layouts/menu.php");
 		</div>
 	</section>
 </div>
+
 <!-- End Content -->
 <?php
 //FOOTER

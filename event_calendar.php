@@ -50,16 +50,19 @@ $query = $sql->select();
                                 <td><a href="<?=URL?>show_event.php?id=<?=$res["ac_id"]?>"><?php echo $res["ac_title"]; ?></a></td>
                                 <td class="text-center"><?php echo $res["year_stu"]; ?></td>
                                 <td class="text-center"><?php
-                                                        if ($res["ac_status"] == 1) {
-                                                            $color = 'red';
-                                                            $ac_status = 'กำลังจะมาถึง';
-                                                        } else if ($res["ac_status"] == 2) {
-                                                            $color = 'green';
-                                                            $ac_status = 'ผ่านไปแล้ว';
-                                                        } else {
-                                                            $color = 'gray';
-                                                            $ac_status = 'ยังไม่กำหนด';
-                                                        }; ?>
+                                                       if ($res["ac_status"] == 1) {
+                                                        $color = 'red';
+                                                        $ac_status = 'กำลังจะมาถึง';
+                                                      } else if ($res["ac_status"] == 2) {
+                                                        $color = 'blue';
+                                                        $ac_status = 'กำลังดำเนินการ';
+                                                      } else if ($res["ac_status"] == 3) {
+                                                        $color = 'green';
+                                                        $ac_status = 'ผ่านไปแล้ว';
+                                                      } else {
+                                                        $color = 'gray';
+                                                        $ac_status = 'ยังไม่กำหนด';
+                                                      }; ?>
                                     <label style="color:<?= $color ?>"><?= $ac_status ?></label>
                                 </td>
                                 <td class="text-center">

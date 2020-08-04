@@ -104,8 +104,8 @@ $query = $sql->select();
               <th width="5%">ลำดับ</th>
               <th width="5%">ประเภทกิจกรรม</th>
               <th width="20%">หัวข้อกิจกรรม</th>
-              <th width="15%">สถานที่</th>
-              <th width="5%">ปีการศึกษา</th>
+              <th width="10%">สถานที่</th>
+              <th width="10%">เวลา</th>
               <th width="10%">สถานะกิจกรรม</th>
               <th width="20%">วันที่จัดกิจกรรม</th>
               <th width="20%">จัดการ</th>
@@ -123,7 +123,14 @@ $query = $sql->select();
                 <td><?php echo $res["ac_type_name"]; ?></td>
                 <td><?php echo $res["ac_title"]; ?></td>
                 <td><?php echo $res["ac_location"]; ?></td>
-                <td><?php echo $res["year_stu"]; ?></td>
+                </td><?php
+$t=time();
+// echo($t . "<br>");
+// echo(date("Y-m-d",$t));
+//  <td class="text-center"> <?= (date("H:i",strtotime($res["ac_start_time"]))) ?></td>
+?>
+              
+                <td class="text-center"> <?=date("H:i",strtotime($res["ac_start_time"]))."-".date("H:i",strtotime($res["ac_end_time"]))  ?></td>
                 <td class="text-center"><?php
                                         if ($res["ac_status"] == 1) {
                                           $color = 'red';
@@ -139,10 +146,10 @@ $query = $sql->select();
                                           $ac_status = 'ยังไม่กำหนด';
                                         }; ?>
                   <label style="color:<?= $color ?>"><?= $ac_status ?></label>
-                </td>
+
                 <td class="text-center"> <?= dateTH($res["ac_start"]) ?> <?php if ($res["ac_start"] != $res["ac_end"]) {
-                                                                          echo " ถึง " . dateTH($res["ac_end"]);
-                                                                        } ?></td>
+                                                                            echo " ถึง " . dateTH($res["ac_end"]);
+                                                                          } ?></td>
                 <td class="text-center">
                   <a href="<?= URL ?>activity/activity_stu_manage.php?id=<?php echo $res["ac_id"]; ?>" class="btn btn-primary"><i class="fa fa-users"></i></a>
                   <a href="<?= URL ?>activity/activity_images.php?id=<?php echo $res["ac_id"]; ?>" class="btn btn-success"><i class="fa fa-image"></i></a>

@@ -13,23 +13,23 @@ $spreadsheet = new Spreadsheet();
 $sheet = $spreadsheet->getActiveSheet();
 $sql->field = "a.*, at.ac_type_name";
 $sql->table = "activity a LEFT JOIN ac_type at ON a.ac_type_id=at.ac_type_id";
-$sql->field="*";
-$sql->condition="WHERE ac_id={$_GET["id"]}";
+$sql->field = "*";
+$sql->condition = "WHERE ac_id={$_GET["id"]}";
 $activity = mysqli_fetch_assoc($sql->select());
-$time = dateTH($activity["ac_start"])." - ".dateTH($activity["ac_end"]);
+$time = dateTH($activity["ac_start"]) . " - " . dateTH($activity["ac_end"]);
 // header
 $spreadsheet->getActiveSheet()
     ->setCellValue('B1', 'ชื่อกิจกรรม')
     ->setCellValue('C1', $activity["ac_title"])
     ->setCellValue('B3', 'วันที่')
-    ->setCellValue('C3',  $time )
+    ->setCellValue('C3',  $time)
     ->setCellValue('B2', 'สถานที่')
     ->setCellValue('C2', $activity["ac_location"])
     ->setCellValue('A5', 'ลำดับ')
     ->setCellValue('B5', 'รหัสนักศึกษา')
     ->setCellValue('C5', 'ชื่อ-นามสกุล')
     ->setCellValue('D5', 'ชั้นปี')
-    ->setCellValue('E5', 'ลายมือชื่อ');
+    ->setCellValue('E5', 'สถานะการเข้าร่วม');
 
 // cell value
 $cell = 6;
@@ -47,16 +47,27 @@ while ($result = mysqli_fetch_assoc($query)) {
         ->setCellValue('A' . $cell, $num)
         ->setCellValue('B' . $cell, $result["stu_code"])
         ->setCellValue('C' . $cell, $result["stu_name"]);
-        if($result["stu_level"] > 4) {
-            $spreadsheet->getActiveSheet()
-            ->setCellValue('D' . $cell,'ศิษย์เก่า');
-        }
-        else{
-            $spreadsheet->getActiveSheet()
-            ->setCellValue('D' . $cell,"ปี ".$result["stu_level"]);
-        };
-        //->setCellValue('D' . $cell, $result["stu_level"]);
-       // ->setCellValue('E' . $cell, $result["stu_code"]);
+    if ($result["stu_level"] > 4) {
+        $spreadsheet->getActiveSheet()
+            ->setCellValue('D' . $cell, 'ศิษย์เก่า');
+    } else {
+        $spreadsheet->getActiveSheet()
+            ->setCellValue('D' . $cell, "ปี " . $result["stu_level"]);
+    };
+    if ($result["status"] == 1) {
+        $spreadsheet->getActiveSheet()
+            ->setCellValue('E' . $cell, 'เข้าร่วม');
+    }
+    if ($result["status"] == 2) {
+        $spreadsheet->getActiveSheet()
+            ->setCellValue('E' . $cell, 'ไม่เข้าร่วม');
+    }
+    if ($result["status"] == 0) {
+        $spreadsheet->getActiveSheet()
+            ->setCellValue('E' . $cell, 'ไม่ระบุ');
+    }
+    //->setCellValue('D' . $cell, $result["stu_level"]);
+
 
     $cell++;
 }
@@ -84,6 +95,6 @@ $sheet->getStyle('E2:E' . $lastRow)->getAlignment()->setHorizontal('center');
 $writer = new Xlsx($spreadsheet);
 
 // save file to server and create link
- header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
- header('Content-Disposition: attachment; filename="student-' . date("Y_m_d") . '.xlsx"');
- $writer->save('php://output');
+header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+header('Content-Disposition: attachment; filename="student-' . date("Y_m_d") . '.xlsx"');
+$writer->save('php://output');

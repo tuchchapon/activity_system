@@ -20,7 +20,7 @@ $condition = !empty($condition) ? "WHERE {$condition}" : "";
 
 $sql->table = "student";
 $sql->field = "*";
-$sql->condition = $condition;
+$sql->condition = "$condition ORDER BY stu_code ASC && ORDER BY stu_level ASC";
 $query = $sql->select();
 ?>
 <!-- Content -->

@@ -39,6 +39,8 @@ include("../layouts/menu.php");
 				<label class="ml-3 mt-3"><i class="fas fa-snowboarding"></i> ข้อมูลกิจกรรม</label>
 				<ul>
 					<li><span style="font-weight: bold;">หัวข้อกิจกรรม :</span> <?=$activity["ac_title"]?></li>
+					<li><span style="font-weight: bold;">สถานที่จัดกิจกรรม :</span> <?=$activity["ac_location"]?></li>
+					<li><span style="font-weight: bold;">วันที่จัด :</span> <?= dateTH($activity["ac_start"]) ?> <?php if ($activity["ac_start"] != $activity["ac_end"]) {  echo " - " . dateTH($activity["ac_end"]);}?></li>
 					<li><span style="font-weight: bold;">ประเภท :</span> <?=$activity["ac_type_name"]?></li>
 				</ul>
             </div>
@@ -130,7 +132,7 @@ include("../layouts/menu.php");
 					
 						<div class="clearfix">
 						<a href="<?=URL?>/activity/activity_report.php" class="btn btn-success">ย้อนกลับ</a>
-
+						<a href="<?= URL ?>activity/report_activity_excel.php?id=<?php echo $_GET["id"]; ?>" class="btn btn-success">พิมพ์รายชื่อ</a>
 						</div>
 						
 					</div>

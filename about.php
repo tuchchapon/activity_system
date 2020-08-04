@@ -48,8 +48,7 @@
       <div class="row">
         <div class="col-md-3">
           <div id="calendar"></div>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSccEUZ5jUFaL2f_ivw_bFZSLaoZnwoxz3Gbgaw8Ssmf8HTPtQ/viewform?fbclid=IwAR3Wiu07J0IDCYFlCQ44SiHTunjWd60rY8V2F5vfwA-9YTKy4lxZ6X_MGBU">แบบสำรวจ  </a>
-        </div>
+                </div>
         <div class="col-md-9">
           <h3><center>ข้อมูลสาขา</center></h3>
           <?php

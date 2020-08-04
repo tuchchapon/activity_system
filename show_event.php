@@ -29,6 +29,7 @@ if (empty($_GET["id"])) {
             <div class="card-body">
                 <ul>
                     <li><span style="font-weight: bold;">หัวข้อกิจกรรม :</span> <?= $result["ac_title"] ?></li>
+                    <li><span style="font-weight: bold;">สถานที่จัดกิจกรรม :</span> <?= $result["ac_location"] ?></li>
                     <li><span style="font-weight: bold;">ประเภท :</span> <?= $result["ac_type_name"] ?></li>
                     <li><span style="font-weight: bold;">วันที่จัด :</span> <?= dateTH($result["ac_start"]) ?> <b>ถึง</b> <?= dateTH($result["ac_end"]) ?></li>
                     <li><span style="font-weight: bold;">ปีการศึกษา :</span> <?= $result["year_stu"] ?></li>

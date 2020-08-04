@@ -65,7 +65,7 @@ if (!empty($_POST)) {
         <input type="type" class="form-control" id="stu_name" name="stu_name" placeholder="ชื่อนักศึกษา" value="<?php echo !empty($res["stu_name"]) ? $res["stu_name"] : "" ?>">
       </div>
       <div class="form-group">
-        <label for="stu_level">ระดับนักศึกษา</label>
+        <label for="stu_level">ระดับชั้นปีนักศึกษา</label>
         <?php
         $sType[] = array("id" => 1, "name" => "ปี 1 ");
         $sType[] = array("id" => 2, "name" => "ปี 2 ");
