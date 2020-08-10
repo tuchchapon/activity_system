@@ -54,18 +54,19 @@ if (!empty($_POST)) {
   </div>
 
   <section class="content">
-    <form class="form-inline" method="POST">
+  <form method="POST" class="form-submit">
 
-      <div class="form-group mx-sm-3 mb-2">
-        <label for="news_type_name" class="sr-only">Password</label>
-        <input type="text" class="form-control" id="news_type_name" name="news_type_name" placeholder="ประเภทข่าว" value="<?php echo !empty($res["news_type_name"]) ? $res["news_type_name"] : "" ?>">
+          <div class="form-group" method="POST">
+        <label for="news_type_name">ประเภทข่าว</label>
+        <input type="type" class="form-control" id="news_type_name" name="news_type_name" placeholder="ประเภทข่าว" value="<?php echo !empty($res["news_type_name"]) ? $res["news_type_name"] : "" ?>">
+        <message class="text-red"></message>
       </div>
       <?php
       if (!empty($res)) {
         echo '<input type="hidden" name="id" value="' . $res["news_type_id"] . '">';
       }
       ?>
-      <button type="submit" class="btn btn-primary mb-2">ยืนยัน</button>
+     <button type="submit" class="btn btn-primary mb-2">ยืนยัน</button>
     </form>
   </section>
 </div>
@@ -74,3 +75,24 @@ if (!empty($_POST)) {
 //FOOTER
 include("../layouts/footer.php");
 ?>
+<script language="javascript">
+  $(".form-submit").submit(function() {
+    var $error = false;
+    if ($(this).find("[name=news_type_name]").val().length < 4) {
+      $div = $(this).find("[name=news_type_name]").closest('div');
+      $div.find('message').text('หัวข้อข่าวต้องมีอย่างน้อย 4 ตัวอักษร');
+      $error = true;
+    }
+
+    if ($error) {
+      return false;
+    }
+  });
+
+  
+  $("[name=news_type_name]").change(function() {
+    $div = $(this).closest('div');
+    $div.find('message').text('');
+  });
+
+</script>

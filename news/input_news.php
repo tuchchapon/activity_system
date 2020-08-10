@@ -55,10 +55,11 @@ if (!empty($_POST)) {
   </div>
 
   <section class="content">
-    <form method="POST">
+    <form method="POST" class="form-submit">
       <div class="form-group" method="POST">
         <label for="news_title">หัวข้อข่าว</label>
         <input type="type" class="form-control" id="news_title" name="news_title" placeholder="หัวข้อข่าว" value="<?php echo !empty($res["news_title"]) ? $res["news_title"] : "" ?>">
+        <message class="text-red"></message>
       </div>
 
       <div class="form-group">
@@ -83,13 +84,15 @@ if (!empty($_POST)) {
           }
           ?>
         </select>
+        <message class="text-red"></message>
       </div>
 
       <div class="form-group">
         <label for="news_detail">รายละเอียดข่าว</label>
         <textarea class="form-control textarea" rows="6" id="news_detail" placeholder="รายละเอียดข่าว" name="news_detail"><?php echo !empty($res["news_detail"]) ? nl2br($res["news_detail"]) : "" ?></textarea>
-
+        <message class="text-red"></message>
       </div>
+      <message class="text-red"></message>
       <?php
       if (!empty($res)) {
         echo '<input type="hidden" name="id" value="' . $res["news_id"] . '">';
@@ -104,3 +107,40 @@ if (!empty($_POST)) {
 //FOOTER
 include("../layouts/footer.php");
 ?>
+<script language="javascript">
+  $(".form-submit").submit(function() {
+    var $error = false;
+    if ($(this).find("[name=news_title]").val().length < 4) {
+      $div = $(this).find("[name=news_title]").closest('div');
+      $div.find('message').text('หัวข้อข่าวต้องมีอย่างน้อย 4 ตัวอักษร');
+      $error = true;
+    }
+    if ($(this).find("[name=news_type_id]").val() == "") {
+      $div = $(this).find("[name=news_type_id]").closest('div');
+      $div.find('message').text('กรุณาเลือกข้อมูลประเภทข่าว');
+      $error = true;
+    }
+    if ($(this).find("[name=news_detail]").val() == "") {
+      $div = $(this).find("[name=news_detail]").closest('div');
+      $div.find('message').text('กรุณากรอกข้อมูลรายละเอียดข่าว');
+      $error = true;
+    }
+    if ($error) {
+      return false;
+    }
+  });
+
+  
+  $("[name=stu_code]").change(function() {
+    $div = $(this).closest('div');
+    $div.find('message').text('');
+  });
+  $("[name=news_type_id]").change(function() {
+    $div = $(this).closest('div');
+    $div.find('message').text('');
+  });
+  $("[name=news_detail]").change(function() {
+    $div = $(this).closest('div');
+    $div.find('message').text('');
+  });
+</script>

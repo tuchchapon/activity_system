@@ -60,7 +60,7 @@ $query = $sql->select();
     <div class="row">
 
       <div class="col-md-3">
-        <div class="card" style="margin-top: 18px;">
+        <div class="card" style="margin-top: 18px;padding :10px 10px 10px 10px;">
           <div id="calendar"></div>
         </div>
       </div>
@@ -110,18 +110,18 @@ $query = $sql->select();
                                       <div class="recent-news-content clearfix">
 
                                         <div class="recent-news-text">
-                                          <h1 class="title-median"><a href="#" title="ทดสอบ">[<strong><?php echo $res["ac_type_name"] ?></strong>] <?php echo $res["ac_title"] ?></a></h1>
+                                          <h1 class="title-median">[<strong><?php echo $res["ac_type_name"] ?></strong>] <?php echo $res["ac_title"] ?></h1>
                                           <div class="recent-news-meta">
                                             <div class="recent-news-date"><?= dateTH($res["ac_start"]) ?> <?php if ($res["ac_start"] != $res["ac_end"]) {
                                                                                                             echo " ถึง " . dateTH($res["ac_end"]);
                                                                                                           } ?>
-                                              เวลา <?= date("H:i",strtotime($res["ac_start_time"])) ?> <?php if ($res["ac_start_time"] != $res["ac_end_time"]) {
-                                                                                                            echo " - " . date("H:i",strtotime($res["ac_end_time"]));
-                                                                                                          } ?>
+                                              เวลา <?= date("H:i", strtotime($res["ac_start_time"])) ?> <?php if ($res["ac_start_time"] != $res["ac_end_time"]) {
+                                                                                                          echo " - " . date("H:i", strtotime($res["ac_end_time"]));
+                                                                                                        } ?>
                                             </div>
 
                                           </div>
-                                          <a href="#" class="moretag" title="read more">อ่านรายละเอียด</a>
+                                          <a href="<?=URL?>show_event.php?id=<?=$res["ac_id"]?>" class="moretag" title="read more">อ่านรายละเอียด</a>
                                 </p>
                               </div>
 
@@ -141,7 +141,7 @@ $query = $sql->select();
 
 
                         <p>
-                          <a href="#" class="btn btn-danger btn-sm pull-right" title="Button">ดูเพิ่มเติม</a>
+                          <a href="<?=URL?>next_event.php" class="btn btn-danger btn-sm pull-right" title="Button">ดูเพิ่มเติม</a>
                         </p>
                       </ul>
                       </p>

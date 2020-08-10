@@ -54,12 +54,12 @@
     <div class="clearfix mt-2 mb-2">
       <div class="row">
         <div class="col-md-3">
-          <div class="card" style="margin-top: 2px;">
+          <div class="card" style="margin-top: 2px;padding :10px 10px 10px 10px;">
             <div id="calendar"></div>
           </div>
         </div>
         <div class="col-md-9">
-          <div class="card" style="border-radius: 25px; background-color: #DCDCDC ; ">
+          <div class="card" style="border-radius: 25px; background-color: #EEE1E1 ;">
             <h3>
               <center>ข้อมูลสาขา</center>
             </h3>

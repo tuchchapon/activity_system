@@ -16,12 +16,12 @@ if (empty($_GET["id"])) {
 }
 ?>
 <main id="main">
-    <div class="container">
-        <div class="card mt-2 mb-2">
-            <div class="card-header bg-primary text-white">
-                <h5><i class="fas fa-snowboarding"></i> ข้อมูลข่าว</h5>
+    <div class="container" >
+        <div class="card mt-2 mb-2" >
+            <div class="card-header  text-white" style="background-color: #f03c02 ;">
+                <h5><i class="fas fa-snowboarding"></i> ข้อมูลข่าวสาร</h5>
             </div>
-            <div class="card-body">
+            <div class="card-body" >
                 <ul>
                     <li><span style="font-weight: bold;">หัวข้อข่าว :</span> <?= $result["news_title"] ?></li>
                     <li><span style="font-weight: bold;">ประเภท :</span> <?= $result["news_type_name"] ?></li>

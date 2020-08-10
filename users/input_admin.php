@@ -47,7 +47,7 @@ if (!empty($_POST)) {
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0 text-dark"><?php echo $title; ?>นักศึกษา</h1>
+          <h1 class="m-0 text-dark"><?php echo $title; ?>ผู้ดูแล </h1>
         </div>
 
       </div>
@@ -55,18 +55,21 @@ if (!empty($_POST)) {
   </div>
 
   <section class="content">
-    <form method="POST">
+    <form method="POST" class="form-submit">
       <div class="form-group" method="POST">
         <label for="username">Username</label>
         <input type="type" class="form-control" id="username" name="username" placeholder="username" value="<?php echo !empty($res["username"]) ? $res["username"] : "" ?>">
+        <message class="text-red"></message>
       </div>
       <div class="form-group" method="POST">
         <label for="password">รหัสผ่าน</label>
         <input type="type" class="form-control" id="password" name="password" placeholder="รหัสผาน" value="<?php echo !empty($res["password"]) ? $res["password"] : "" ?>">
+        <message class="text-red"></message>
       </div>
       <div class="form-group" method="POST">
         <label for="Name">ชื่อ-นามสกุล</label>
         <input type="type" class="form-control" id="Name" name="Name" placeholder="ชื่อ-นามสกุล" value="<?php echo !empty($res["Name"]) ? $res["Name"] : "" ?>">
+        <message class="text-red"></message>
       </div>
 
       <?php
@@ -83,3 +86,44 @@ if (!empty($_POST)) {
 //FOOTER
 include("../layouts/footer.php");
 ?>
+<script language="javascript">
+  $(".form-submit").submit(function() {
+    var $error = false;
+    if ($(this).find("[name=username]").val().length < 4) {
+      $div = $(this).find("[name=username]").closest('div');
+      $div.find('message').text('username ต้องมีอย่างน้อย 4 ตัวอักษร');
+      $error = true;
+    }
+    if ($(this).find("[name=password]").val() == "") {
+      $div = $(this).find("[name=password]").closest('div');
+      $div.find('message').text('กรุณากรอกข้อมูลรหัสผ่าน');
+      $error = true;
+    }
+    if ($(this).find("[name=Name]").val() == "") {
+      $div = $(this).find("[name=Name]").closest('div');
+      $div.find('message').text('กรุณากรอกข้อมูลชื่อ-สกุล');
+      $error = true;
+    }
+
+    if ($error) {
+      return false;
+    }
+  });
+
+  
+  $("[name=username]").change(function() {
+    $div = $(this).closest('div');
+    $div.find('message').text('');
+  });
+  $("[name=password]").change(function() {
+    $div = $(this).closest('div');
+    $div.find('message').text('');
+  });
+
+  $("[name=Name]").change(function() {
+    $div = $(this).closest('div');
+    $div.find('message').text('');
+  });
+
+
+</script>

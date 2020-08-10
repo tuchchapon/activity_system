@@ -58,7 +58,7 @@ if (!empty($_POST)) {
     <form method="POST" class="form-submit" >
       <div class="form-group" method="POST">
         <label for="stu_code">รหัสนักศึกษา</label>
-        <input type="type" class="form-control" id="stu_code" name="stu_code" placeholder="รหัสนักศึกษา" value="<?php echo !empty($res["stu_code"]) ? $res["stu_code"] : "" ?>">
+        <input type="number" class="form-control" id="stu_code" name="stu_code" placeholder="รหัสนักศึกษา" value="<?php echo !empty($res["stu_code"]) ? $res["stu_code"] : "" ?>">
         <message class="text-red"></message>
       </div>
       <div class="form-group" method="POST">
@@ -77,6 +77,7 @@ if (!empty($_POST)) {
         ?>
         <select class="form-control" id="stu_level" name="stu_level">
           <option value="">-- เลือกชั้นปี --</option>
+         
           <?php
           foreach ($sType as $type) {
             $sel = "";
@@ -90,6 +91,7 @@ if (!empty($_POST)) {
           }
           ?>
         </select>
+        <message class="text-red"></message>
       </div>
       <div class="form-group">
         <label for="stu_status">สถานะนักศึกษา</label>
@@ -111,8 +113,10 @@ if (!empty($_POST)) {
             <option <?= $sel ?> value="<?= $type["id"] ?>"><?= $type["name"] ?></option>
           <?php
           }
+          
           ?>
         </select>
+        <message class="text-red"></message>  
       </div>
 
       <?php
@@ -137,7 +141,26 @@ include("../layouts/footer.php");
       $div.find('message').text('รหัสนักศึกษาต้องมี 11 ตัวเท่านั้น');
       $error = true;
     }
-
+    if ($(this).find("[name=stu_name]").val() == "") {
+      $div = $(this).find("[name=stu_name]").closest('div');
+      $div.find('message').text('กรุณากรอกชื่อ-สกุล');
+      $error = true;
+    }  
+    if ($(this).find("[name=stu_level]").val() == "") {
+      $div = $(this).find("[name=stu_level]").closest('div');
+      $div.find('message').text('กรุณาเลือกข้อมูลชั้นปี');
+      $error = true;
+    }
+    if ($(this).find("[name=stu_status]").val() == "") {
+      $div = $(this).find("[name=stu_status]").closest('div');
+      $div.find('message').text('กรุณาเลือกข้อมูลสถานะนักศึกษา');
+      $error = true;
+    }
+    if ($(this).find("[name=ac_detail]").val() == "") {
+      $div = $(this).find("[name=ac_detail]").closest('div');
+      $div.find('message').text('กรุณากรอกรายละเอียด');
+      $error = true;
+    }
     if ($error) {
       return false;
     }
@@ -145,6 +168,18 @@ include("../layouts/footer.php");
 
   
   $("[name=stu_code]").change(function() {
+    $div = $(this).closest('div');
+    $div.find('message').text('');
+  });
+  $("[name=stu_name]").change(function() {
+    $div = $(this).closest('div');
+    $div.find('message').text('');
+  });
+  $("[name=stu_level]").change(function() {
+    $div = $(this).closest('div');
+    $div.find('message').text('');
+  });
+  $("[name=stu_status]").change(function() {
     $div = $(this).closest('div');
     $div.find('message').text('');
   });
