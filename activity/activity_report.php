@@ -11,7 +11,7 @@ include("../layouts/menu.php");
 
 $sql->table = "activity a LEFT JOIN ac_type at ON a.ac_type_id=at.ac_type_id";
 $sql->field = "a.*, at.ac_type_name";
-$sql->condition = "WHERE ac_status =2 ";
+$sql->condition = "WHERE ac_status =3 ";
 $query = $sql->select();
 // $sql->table = "ac_stu_status";
 // $sql->field = "*";
@@ -43,9 +43,9 @@ $query = $sql->select();
                         <tr class="text-center table-info">
                             <th width="5%">ลำดับ</th>
                             <th width="10%">ประเภทกิจกรรม</th>
-                            <th width="32%">หัวข้อกิจกรรม</th>
-                            <th width="13%">ปีการศึกษา</th>
-                            <th width="15%">เข้าร่วม/ทั้งหมด</th>
+                            <th width="30%">หัวข้อกิจกรรม</th>  
+                            <th width="20%">เวลา</th>  
+                            <th width="10%">เข้าร่วม/ทั้งหมด</th>
                             <th width="10%">วันที่</th>
                             <th width="15%">รายงาน</th>
                         </tr>
@@ -75,9 +75,9 @@ $query = $sql->select();
                         ?>
                             <tr>
                                 <td class="text-center"><?php echo $num; ?></td>
-                                <td><?php echo $res["ac_type_name"]; ?></td>
-                                <td><?php echo $res["ac_title"]; ?></td>
-                                <td class="text-center"><?php echo $res["year_stu"]; ?></td>
+                                <td class="text-center"><?php echo $res["ac_type_name"]; ?></td>
+                                <td class="text-center"><?php echo $res["ac_title"]; ?></td>
+                                <td class="text-center"><?php echo $res["ac_start_time"].'-'.$res["ac_end_time"]; ?></td>
                                 <td class="text-center">
                                     <?php 
                                     $sql->table = "ac_stu_status";

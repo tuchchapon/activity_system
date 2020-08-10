@@ -23,7 +23,7 @@ if (empty($_GET["id"])) {
 <main id="main">
     <div class="container">
         <div class="card mt-2 mb-2">
-            <div class="card-header bg-primary text-white">
+            <div class="card-header  text-white" style="background-color: #f03c02 ;">
                 <h5><i class="fas fa-snowboarding"></i> ข้อมูลกิจกรรม</h5>
             </div>
             <div class="card-body">
@@ -32,7 +32,7 @@ if (empty($_GET["id"])) {
                     <li><span style="font-weight: bold;">สถานที่จัดกิจกรรม :</span> <?= $result["ac_location"] ?></li>
                     <li><span style="font-weight: bold;">ประเภท :</span> <?= $result["ac_type_name"] ?></li>
                     <li><span style="font-weight: bold;">วันที่จัด :</span> <?= dateTH($result["ac_start"]) ?> <b>ถึง</b> <?= dateTH($result["ac_end"]) ?></li>
-                    <li><span style="font-weight: bold;">ปีการศึกษา :</span> <?= $result["year_stu"] ?></li>
+                    <li><span style="font-weight: bold;">เวลา :</span> <?=  date("H:i",strtotime($result["ac_start_time"])) ?> <b>-</b> <?= date("H:i",strtotime($result["ac_end_time"])) ?></li>
                     <li><span style="font-weight: bold;">นักศึกษาที่ต้องเข้าร่วม : </span><?php
                     $eYear = '';
                     if( mysqli_num_rows(($query2)) > 0  ){

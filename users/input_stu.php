@@ -55,14 +55,16 @@ if (!empty($_POST)) {
   </div>
 
   <section class="content">
-    <form method="POST">
+    <form method="POST" class="form-submit" >
       <div class="form-group" method="POST">
         <label for="stu_code">รหัสนักศึกษา</label>
         <input type="type" class="form-control" id="stu_code" name="stu_code" placeholder="รหัสนักศึกษา" value="<?php echo !empty($res["stu_code"]) ? $res["stu_code"] : "" ?>">
+        <message class="text-red"></message>
       </div>
       <div class="form-group" method="POST">
         <label for="stu_name">ชื่อนักศึกษา</label>
         <input type="type" class="form-control" id="stu_name" name="stu_name" placeholder="ชื่อนักศึกษา" value="<?php echo !empty($res["stu_name"]) ? $res["stu_name"] : "" ?>">
+        <message class="text-red"></message>
       </div>
       <div class="form-group">
         <label for="stu_level">ระดับชั้นปีนักศึกษา</label>
@@ -127,3 +129,23 @@ if (!empty($_POST)) {
 //FOOTER
 include("../layouts/footer.php");
 ?>
+<script language="javascript">
+  $(".form-submit").submit(function() {
+    var $error = false;
+    if ($(this).find("[name=stu_code]").val().length != 11) {
+      $div = $(this).find("[name=stu_code]").closest('div');
+      $div.find('message').text('รหัสนักศึกษาต้องมี 11 ตัวเท่านั้น');
+      $error = true;
+    }
+
+    if ($error) {
+      return false;
+    }
+  });
+
+  
+  $("[name=stu_code]").change(function() {
+    $div = $(this).closest('div');
+    $div.find('message').text('');
+  });
+</script>

@@ -58,17 +58,17 @@ if (!empty($_POST)) {
     <form method="POST" class="form-submit">
       <div class="form-group" method="POST">
         <label for="ac_title">หัวข้อกิจกรรม</label>
-        <input type="text" class="form-control" id="ac_title" name="ac_title" placeholder="หัวข้อกิจกรรม" value="<?php echo !empty($res["ac_title"]) ? $res["ac_title"] : "" ?>">
+        <input type="text" class="form-control" pattern="^[A-Za-zก-๏\s0-9]+$" title="กรุณากรอกภาษาอังกฤษ ภาษาไทย และตัวเลขเท่านั้น" id="ac_title" name="ac_title" placeholder="หัวข้อกิจกรรม" value="<?php echo !empty($res["ac_title"]) ? $res["ac_title"] : "" ?>">
         <message class="text-red"></message>
       </div>
       <div class="form-group" method="POST">
         <label for="ac_location">สถานที่จัดกิจกรรม</label>
-        <input type="text" class="form-control" id="ac_location" name="ac_location" placeholder="สถานที่จัดกิจกรรม" value="<?php echo !empty($res["ac_location"]) ? $res["ac_location"] : "" ?>">
+        <input type="text" class="form-control" pattern="^[A-Za-zก-๏\s0-9]+$" title="กรุณากรอกภาษาอังกฤษ ภาษาไทย และตัวเลขเท่านั้น" id="ac_location" name="ac_location" placeholder="สถานที่จัดกิจกรรม" value="<?php echo !empty($res["ac_location"]) ? $res["ac_location"] : "" ?>">
         <message class="text-red"></message>
       </div>
       <div class="form-group" method="POST">
         <label for="ac_start_time">เวลาเริ่มกิจกรรม</label>
-        <input type="time-local" class="form-control" id="ac_start_time" name="ac_start_time"  placeholder="เวลาเริ่มกิจกรรม" value="<?php echo !empty($res["ac_start_time"]) ? $res["ac_start_time"] : "" ?>">
+        <input type="time" class="form-control" id="ac_start_time" name="ac_start_time" placeholder="เวลาเริ่มกิจกรรม" value="<?php echo !empty($res["ac_start_time"]) ? $res["ac_start_time"] : "" ?>">
         <message class="text-red"></message>
       </div>
       <div class="form-group" method="POST">
@@ -82,7 +82,7 @@ if (!empty($_POST)) {
         <message class="text-red"></message>
       </div>
       <div class="form-group" method="POST">
-        <label for="ac_end">วันที่สิ้นสุด</label>
+        <label for="ac_end">วันที่สิ้นสุด <label class="text-red" style="font-size: 13px;">*ในกรณีที่กิจกรรมมี 1 วันให้เลือกวันที่สิ้นสุดเป็นวันเดียวกับวันที่เริ่มต้น</label></label>
         <input type="date" class="form-control" id="ac_end" name="ac_end" placeholder="วันที่สิ้นสุด" value="<?php echo !empty($res["ac_end"]) ? $res["ac_end"] : "" ?>">
         <message class="text-red"></message>
       </div>
@@ -92,7 +92,7 @@ if (!empty($_POST)) {
         $sType[] = array("id" => 1, "name" => "กำลังจะมาถึง");
         $sType[] = array("id" => 2, "name" => "กำลังดำเนินการ");
         $sType[] = array("id" => 3, "name" => "ผ่านไปแล้ว");
-        $sType[] = array("id" => 3, "name" => "ยังไม่กำหนด");
+        $sType[] = array("id" => 4, "name" => "ยังไม่กำหนด");
         ?>
         <select class="form-control" id="ac_status" name="ac_status">
           <option value="">-- เลือกประเภท --</option>
@@ -190,19 +190,29 @@ include("../layouts/footer.php");
       $div.find('message').text('กรุณากรอกชื่อกิจกรรม');
       $error = true;
     }
+    if ($(this).find("[name=ac_title]").val().length < 4) {
+      $div = $(this).find("[name=ac_title]").closest('div');
+      $div.find('message').text('ชื่อกิจกรรมต้องมีมากกว่า 4 ตัวอักษร');
+      $error = true;
+    }
     if ($(this).find("[name=ac_location]").val() == "") {
       $div = $(this).find("[name=ac_location]").closest('div');
       $div.find('message').text('กรุณากรอกสถานที่');
       $error = true;
     }
-    if ($(this).find("[name=year_stu]").val() == "") {
-      $div = $(this).find("[name=year_stu]").closest('div');
-      $div.find('message').text('กรุณากรอกปีการศึกษา');
-      $error = true;  
+    if ($(this).find("[name=ac_location]").val().length < 4) {
+      $div = $(this).find("[name=ac_location]").closest('div');
+      $div.find('message').text('สถานที่ต้องมีมากกว่า 4 ตัวอักษร');
+      $error = true;
     }
-    if ($(this).find("[name=year_stu]").maxlength(4)) {
-      $div = $(this).find("[name=year_stu]").closest('div');
-      $div.find('message').text('กรุณากรอก 4 ตัวอักษร');
+    if ($(this).find("[name=ac_start_time]").val() == "") {
+      $div = $(this).find("[name=ac_start_time]").closest('div');
+      $div.find('message').text('กรุณากรอกเวลาเริ่มต้น');
+      $error = true;
+    }
+    if ($(this).find("[name=ac_end_time]").val() == "") {
+      $div = $(this).find("[name=ac_end_time]").closest('div');
+      $div.find('message').text('กรุณากรอกเวลาสิ้นสุด');
       $error = true;
     }
     if ($(this).find("[name=ac_start]").val() == "") {
@@ -230,7 +240,15 @@ include("../layouts/footer.php");
       $div.find('message').text('กรุณากรอกรายละเอียด');
       $error = true;
     }
-
+    if ($(this).find("[name=ac_start_time]").val() != "" && $(this).find("[name=ac_end_time]").val() != "") {
+      if ($(this).find("[name=ac_start_time]").val() > $(this).find("[name=ac_end_time]").val()) {
+        $div = $(this).find("[name=ac_start_time]").closest('div');
+        $div.find('message').text('กรุณากรอกข้อมูลเวลาให้ถูกต้อง');
+        $div = $(this).find("[name=ac_end_time]").closest('div');
+        $div.find('message').text('กรุณากรอกข้อมูลเวลาให้ถูกต้อง');
+        $error = true;
+      }
+    }
 
 
     if ($(this).find("[name=ac_start]").val() != "" && $(this).find("[name=ac_end]").val() != "") {
@@ -257,7 +275,11 @@ include("../layouts/footer.php");
     $div = $(this).closest('div');
     $div.find('message').text('');
   });
-  $("[name=year_stu]").change(function() {
+  $("[name=ac_start_time]").change(function() {
+    $div = $(this).closest('div');
+    $div.find('message').text('');
+  });
+  $("[name=ac_end_time]").change(function() {
     $div = $(this).closest('div');
     $div.find('message').text('');
   });

@@ -20,7 +20,7 @@ $condition = !empty($condition) ? "WHERE {$condition}" : "";
 
 $sql->table = "student";
 $sql->field = "*";
-$sql->condition = "$condition ORDER BY stu_code ASC && ORDER BY stu_level ASC";
+$sql->condition = "$condition ORDER BY stu_level ASC,stu_code ASC";
 $query = $sql->select();
 ?>
 <!-- Content -->
@@ -114,8 +114,8 @@ $query = $sql->select();
                   <label style="color:<?= $color ?>"><?= $ac_status ?></label>
                 </td>
                 <td class="text-center">
-                  <a href="<?= URL ?>users/input_stu.php?id=<?php echo $res["stu_id"]; ?>" class="btn btn-warning">แก้ไข</a>
-                  <a onclick="return confirm('ต้องการลบข้อมูลนี้ใช่หรือไม่')" href="<?= URL ?>users/delete_stu.php?id=<?php echo $res["stu_id"]; ?>" class="btn btn-danger">ลบ</a>
+                  <a href="<?= URL ?>users/input_stu.php?id=<?php echo $res["stu_id"]; ?>" class="btn btn-warning"><i class="fa fa-pen"></i></a>
+                  <a onclick="return confirm('ต้องการลบข้อมูลนี้ใช่หรือไม่')" href="<?= URL ?>users/delete_stu.php?id=<?php echo $res["stu_id"]; ?>" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                 </td>
               </tr>
             <?php } ?>

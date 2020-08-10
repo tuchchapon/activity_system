@@ -50,8 +50,8 @@ $query = $sql->select();
                 <td class="text-center"><?php echo $num; ?></td>
                 <td><?php echo $res["news_type_name"]; ?></td>
                 <td class="text-center">
-                  <a href="<?= URL ?>news/input_nt.php?id=<?php echo $res["news_type_id"]; ?>" class="btn btn-warning">แก้ไข</a>
-                  <a onclick="return confirm('ต้องการลบข้อมูลนี้ใช่หรือไม่')" href="<?= URL ?>news/delete_nt.php?id=<?php echo $res["news_type_id"]; ?>" class="btn btn-danger">ลบ</a>
+                  <a href="<?= URL ?>news/input_nt.php?id=<?php echo $res["news_type_id"]; ?>" class="btn btn-warning"><i class="fa fa-pen"></i></a>
+                  <a onclick="return confirm('ต้องการลบข้อมูลนี้ใช่หรือไม่')" href="<?= URL ?>news/delete_nt.php?id=<?php echo $res["news_type_id"]; ?>" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                 </td>
               </tr>
             <?php } ?>

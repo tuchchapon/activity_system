@@ -14,15 +14,23 @@ $query = $sql->select();
 
 while($result = mysqli_fetch_assoc($query)){
     $color = '';
-    // if( $result["ac_status"] == 1 ){
-    //     $color = '';
-    // }
+    if( $result["ac_status"] == 1 ){
+        $color = '#24D0DA';
+        //สถานะกิจกรรม กำลังจัดกิจกรรม
+    }
     if( $result["ac_status"] == 2 ){
-        $color = 'green';
+        $color = 'blue';
+        //สถานะกิจกรรม กำลังจัดกิจกรรม
     }
     if( $result["ac_status"] == 3 ){
-        $color = 'red';
+        $color = 'green';
+        //สถานะกิจกรรม ผ่านไปแล้ว
     }
+    if( $result["ac_status"] == 4 ){
+        $color = '#F3EAF1 ';
+        //สถานะกิจกรรม ผ่านไปแล้ว
+    }
+
     $data[] = [
         "title" => $result["ac_title"],
         "start" => $result["ac_start"],

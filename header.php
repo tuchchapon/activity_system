@@ -27,6 +27,8 @@ include("config.php");
     <link href="assets/vendor/venobox/venobox.css" rel="stylesheet">
     <link href="assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.fe.min.css" rel="stylesheet">
+    <link href="assets/css/style1.css" rel="stylesheet">
     <link href='https://use.fontawesome.com/releases/v5.0.6/css/all.css' rel='stylesheet'>
 
     <!-- Template Main CSS File -->
@@ -43,7 +45,7 @@ include("config.php");
   ======================================================== -->
 </head>
 
-<body>
+<body id="bgbody" style="background-size: 100% 100%;" >
     <header id="header">
         <div class="container d-flex">
 

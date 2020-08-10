@@ -69,8 +69,9 @@ $query = $sql->select();
             <label for="ac_status">สถานะกิจกรรม</label>
             <?php
             $sType[] = array("id" => 1, "name" => "กำลังจะมาถึง");
-            $sType[] = array("id" => 2, "name" => "ผ่านไปแล้ว");
-            $sType[] = array("id" => 3, "name" => "ยังไม่กำหนด");
+            $sType[] = array("id" => 2, "name" => "กำลังดำเนินการ");
+            $sType[] = array("id" => 3, "name" => "ผ่านไปแล้ว");
+            $sType[] = array("id" => 4, "name" => "ยังไม่กำหนด");
             ?>
             <select class="form-control" id="ac_status" name="ac_status" style="width:170px;">
               <option value="">-- เลือกสถานะ --</option>
@@ -122,15 +123,8 @@ $query = $sql->select();
                 <td class="text-center"><?php echo $num; ?></td>
                 <td><?php echo $res["ac_type_name"]; ?></td>
                 <td><?php echo $res["ac_title"]; ?></td>
-                <td><?php echo $res["ac_location"]; ?></td>
-                </td><?php
-$t=time();
-// echo($t . "<br>");
-// echo(date("Y-m-d",$t));
-//  <td class="text-center"> <?= (date("H:i",strtotime($res["ac_start_time"]))) ?></td>
-?>
-              
-                <td class="text-center"> <?=date("H:i",strtotime($res["ac_start_time"]))."-".date("H:i",strtotime($res["ac_end_time"]))  ?></td>
+                <td><?php echo $res["ac_location"]; ?>
+                <td class="text-center"> <?=date("H:i",strtotime($res["ac_start_time"]))."-".date("H:i",strtotime($res["ac_end_time"]))  ?></td></td>
                 <td class="text-center"><?php
                                         if ($res["ac_status"] == 1) {
                                           $color = 'red';

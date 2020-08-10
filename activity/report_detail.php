@@ -41,6 +41,7 @@ include("../layouts/menu.php");
 					<li><span style="font-weight: bold;">หัวข้อกิจกรรม :</span> <?=$activity["ac_title"]?></li>
 					<li><span style="font-weight: bold;">สถานที่จัดกิจกรรม :</span> <?=$activity["ac_location"]?></li>
 					<li><span style="font-weight: bold;">วันที่จัด :</span> <?= dateTH($activity["ac_start"]) ?> <?php if ($activity["ac_start"] != $activity["ac_end"]) {  echo " - " . dateTH($activity["ac_end"]);}?></li>
+					<li><span style="font-weight: bold;">วันที่เวลา :</span> <?= date("H-i",strtotime($activity["ac_start_time"])) ?> <?php if ($activity["ac_start_time"] != $activity["ac_end_time"]) {  echo " - " . date("H-i",strtotime($activity["ac_end_time"]));}?></li>
 					<li><span style="font-weight: bold;">ประเภท :</span> <?=$activity["ac_type_name"]?></li>
 				</ul>
             </div>
@@ -97,7 +98,7 @@ include("../layouts/menu.php");
 								if( !empty($_GET["year"]) ) $condition = " AND year_stu='{$_GET["year"]}'";
 								$sql->table = "ac_stu_status ast LEFT JOIN student s ON ast.stu_id=s.stu_id";
 								$sql->field = "ast.*, s.stu_code, s.stu_name";
-								$sql->condition = "WHERE ac_id={$_GET["id"]}".$condition;
+								$sql->condition = "WHERE ac_id={$_GET["id"]} {$condition} ORDER BY year_stu ASC , stu_code ASC ";
 								$query = $sql->select();
 								while($result = mysqli_fetch_assoc($query)){
 								?>

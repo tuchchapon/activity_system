@@ -3,8 +3,8 @@
 <link href='packages/daygrid/main.css' rel='stylesheet' />
 <link href='packages/bootstrap/main.css' rel='stylesheet' />
 <main id="main">
-  <div class="container">
-    <div id="calendar" class="m-4"></div>
+  <div class="container" style="background-color: white;">
+   <div class="card p-3"> <div id="calendar" class="m-4"></div></div>
   </div>
 </main>
 

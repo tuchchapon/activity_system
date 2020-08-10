@@ -6,7 +6,7 @@ date_default_timezone_set("Asia/Bangkok");
 define('URL', 'http://localhost/activity_system/');
 
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'activity_sys');
+define('DB_NAME', 'activity_system');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 

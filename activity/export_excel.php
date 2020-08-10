@@ -16,16 +16,19 @@ $sql->table = "activity a LEFT JOIN ac_type at ON a.ac_type_id=at.ac_type_id";
 $sql->field="*";
 $sql->condition="WHERE ac_id={$_GET["id"]}";
 $activity = mysqli_fetch_assoc($sql->select());
-$time = dateTH($activity["ac_start"])." - ".dateTH($activity["ac_end"]);
+$date = dateTH($activity["ac_start"]) . " - " . dateTH($activity["ac_end"]);
+$time = date("H:i",strtotime($activity["ac_start_time"])) . " - " . date("H:i",strtotime($activity["ac_end_time"]));
 // header
 $spreadsheet->getActiveSheet()
     ->setCellValue('B1', 'ชื่อกิจกรรม')
     ->setCellValue('C1', $activity["ac_title"])
     ->setCellValue('B3', 'วันที่')
-    ->setCellValue('C3',  $time )
+    ->setCellValue('C3',  $date )
     ->setCellValue('B2', 'สถานที่')
     ->setCellValue('C2', $activity["ac_location"])
     ->setCellValue('A5', 'ลำดับ')
+    ->setCellValue('C4', $time)
+    ->setCellValue('B4', 'เวลา')
     ->setCellValue('B5', 'รหัสนักศึกษา')
     ->setCellValue('C5', 'ชื่อ-นามสกุล')
     ->setCellValue('D5', 'ชั้นปี')
@@ -35,7 +38,7 @@ $spreadsheet->getActiveSheet()
 $cell = 6;
 $sql->table = "ac_stu_status ast LEFT JOIN student s ON ast.stu_id=s.stu_id";
 $sql->field = "ast.*, s.*";
-$sql->condition = "WHERE ac_id={$_GET["id"]}";
+$sql->condition = "WHERE ac_id={$_GET["id"]} ORDER BY year_stu ASC,stu_code ASC";
 $query = $sql->select();
 $numRows = mysqli_num_rows($query);
 

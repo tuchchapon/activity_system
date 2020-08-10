@@ -3,61 +3,74 @@
 <link href='packages/daygrid/main.css' rel='stylesheet' />
 <link href='packages/bootstrap/main.css' rel='stylesheet' />
 <style>
+
   .mySlides {
     display: none;
   }
+
   #calendar {
     width: 100%;
     margin: 0 auto;
     font-size: 10px;
-}
-.fc-header-title h2 {
+  }
+
+  .fc-header-title h2 {
     font-size: .9em;
     white-space: normal !important;
-}
-.fc-view-month .fc-event, .fc-view-agendaWeek .fc-event {
+  }
+
+  .fc-view-month .fc-event,
+  .fc-view-agendaWeek .fc-event {
     font-size: 0;
     overflow: hidden;
     height: 2px;
-}
-.fc-view-agendaWeek .fc-event-vert {
+  }
+
+  .fc-view-agendaWeek .fc-event-vert {
     font-size: 0;
     overflow: hidden;
     width: 2px !important;
-}
-.fc-agenda-axis {
+  }
+
+  .fc-agenda-axis {
     width: 20px !important;
     font-size: .7em;
-}
+  }
 
-.fc-button-content {
+  .fc-button-content {
     padding: 0;
-}
+  }
 </style>
 
 <body>
 
   <div class="container mt-3">
     <div class="w3-content w3-section">
-      <img class="mySlides" src="img/software1.jpg" style="width:100%; height:400px;">
-      <img class="mySlides" src="img/software2.jpg" style="width:100%; height:400px;">
-      <img class="mySlides" src="img/software3.jpg" style="width:100%; height:400px;">
+      <img class="mySlides" src="img/software1.jpg" style="width:100%; height:400px;border-radius: 25px;">
+      <img class="mySlides" src="img/software2.jpg" style="width:100%; height:400px;border-radius: 25px;">
+      <img class="mySlides" src="img/software3.jpg" style="width:100%; height:400px;border-radius: 25px;">
     </div>
 
     <div class="clearfix mt-2 mb-2">
       <div class="row">
         <div class="col-md-3">
-          <div id="calendar"></div>
-                </div>
+          <div class="card" style="margin-top: 2px;">
+            <div id="calendar"></div>
+          </div>
+        </div>
         <div class="col-md-9">
-          <h3><center>ข้อมูลสาขา</center></h3>
-          <?php
-          $sql->table = "web_info";
-          $query = $sql->select();
-          $info = mysqli_fetch_assoc($query);
+          <div class="card" style="border-radius: 25px; background-color: #DCDCDC ; ">
+            <h3>
+              <center>ข้อมูลสาขา</center>
+            </h3>
+            <?php
+            $sql->table = "web_info";
+            $query = $sql->select();
+            $info = mysqli_fetch_assoc($query);
 
-          echo $info['detail'];
-          ?>
+            echo $info['detail'];
+            ?>
+          </div>
         </div>
       </div>
     </div>

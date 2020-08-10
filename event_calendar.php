@@ -15,7 +15,7 @@ if (!empty($_GET["type"])) {
 }
 
 $sql->table = "activity a LEFT JOIN ac_type ac ON a.ac_type_id=ac.ac_type_id";
-$sql->condition = $condition." ORDER BY year_stu DESC";
+$sql->condition = $condition;
 $query = $sql->select();
 ?>
 <main id="main">
@@ -32,8 +32,8 @@ $query = $sql->select();
                             <th width="5%">ลำดับ</th>
                             <th width="10%">ประเภท</th>
                             <th width="30%">หัวข้อกิจกรรม</th>
-                            <th width="15%">ปีการศึกษา</th>
-                            <th width="10%">สถานะ</th>
+                        
+                            <th  width="10%" style="text-emphasis-position: center;" >สถานะ</th>
                             <th width="20%">วันที่จัด</th>
                         </tr>
                     </thead>
@@ -48,7 +48,7 @@ $query = $sql->select();
                                 <td class="text-center"><?php echo $num; ?></td>
                                 <td><?php echo $res["ac_type_name"]; ?></td>
                                 <td><a href="<?=URL?>show_event.php?id=<?=$res["ac_id"]?>"><?php echo $res["ac_title"]; ?></a></td>
-                                <td class="text-center"><?php echo $res["year_stu"]; ?></td>
+                                
                                 <td class="text-center"><?php
                                                        if ($res["ac_status"] == 1) {
                                                         $color = 'red';

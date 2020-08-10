@@ -25,7 +25,6 @@ if (empty($_GET["id"])) {
                 <ul>
                     <li><span style="font-weight: bold;">หัวข้อข่าว :</span> <?= $result["news_title"] ?></li>
                     <li><span style="font-weight: bold;">ประเภท :</span> <?= $result["news_type_name"] ?></li>
-                    <li><span style="font-weight: bold;">วันที่จัด :</span> <?= dateTH($result["news_create"]) ?> <b>ถึง</b> <?= dateTH($result["news_update"]) ?></li>
                 </ul>
                 <div class="clearfix">
                     <b class="ml-2">รายละเอียดข่าว</b>

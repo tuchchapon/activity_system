@@ -52,8 +52,8 @@ $query = $sql->select();
                 <td><?php echo $res["username"]; ?></td>
                 <td><?php echo $res["Name"]; ?></td>
                 <td class="text-center">
-                  <a href="<?= URL ?>users/input_admin.php?id=<?php echo $res["user_id"]; ?>" class="btn btn-warning">แก้ไข</a>
-                  <a onclick="return confirm('ต้องการลบข้อมูลนี้ใช่หรือไม่')" href="<?= URL ?>users/delete_admin.php?id=<?php echo $res["user_id"]; ?>" class="btn btn-danger">ลบ</a>
+                  <a href="<?= URL ?>users/input_admin.php?id=<?php echo $res["user_id"]; ?>" class="btn btn-warning"><i class="fa fa-pen"></i></a>
+                  <a onclick="return confirm('ต้องการลบข้อมูลนี้ใช่หรือไม่')" href="<?= URL ?>users/delete_admin.php?id=<?php echo $res["user_id"]; ?>" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                 </td>
               </tr>
             <?php } ?>

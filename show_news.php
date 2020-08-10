@@ -1,5 +1,6 @@
 <?php include("header.php"); ?>
 
+
 <?php
 $condition = "";
 if (!empty($_GET["type"])) {
