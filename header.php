@@ -64,10 +64,17 @@ include("config.php");
                             <?php
                             $sql->table = "ac_type";
                             $sql->condition = "";
+                            
                             $query = $sql->select();
-                            while ($result = mysqli_fetch_assoc($query)) {
+
+                            while ($result = mysqli_fetch_assoc($query)) {   
+                                $sql->table = "activity";
+                                $sql->condition = "WHERE ac_type_id = {$result["ac_type_id"]}";
+                                 $count_ac_type = $sql->countRow();                                             
                             ?>
-                                <li><a href="event_calendar.php?type=<?= $result["ac_type_id"] ?>"><?= $result["ac_type_name"] ?></a></li>
+                            
+                                <li><a href="event_calendar.php?type=<?= $result["ac_type_id"]  ?>"><p><?= $result["ac_type_name"] ?> (<span style="color: red;"><?= $count_ac_type?></span>)</p></a></li>
+                           
                             <?php
                             }
                             ?>

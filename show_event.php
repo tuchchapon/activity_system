@@ -61,6 +61,9 @@ if (empty($_GET["id"])) {
                         <?= nl2br($result["ac_detail"]) ?>
                     </div>
                 </div>
+                <div class="clearfix">
+                    <a href="<?= URL ?>report_stu.php?id=<?php echo $_GET["id"]; ?>" class="btn btn-success">รายงานการเข้าร่วมกิจกรรม</a>
+                </div>
             </div>
         </div>
         <?php

@@ -77,7 +77,7 @@ $query = $sql->select();
                                 <td class="text-center"><?php echo $num; ?></td>
                                 <td class="text-center"><?php echo $res["ac_type_name"]; ?></td>
                                 <td class="text-center"><?php echo $res["ac_title"]; ?></td>
-                                <td class="text-center"><?php echo $res["ac_start_time"].'-'.$res["ac_end_time"]; ?></td>
+                                <td class="text-center"><?php echo date("H:i",strtotime($res["ac_start_time"])).'-'.date("H:i",strtotime($res["ac_end_time"])); ?></td>
                                 <td class="text-center">
                                     <?php 
                                     $sql->table = "ac_stu_status";

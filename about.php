@@ -43,7 +43,7 @@
 </style>
 
 <body>
-
+<main id="main" >
   <div class="container mt-3">
     <div class="w3-content w3-section">
       <img class="mySlides" src="img/software1.jpg" style="width:100%; height:400px;border-radius: 25px;">
@@ -59,7 +59,7 @@
           </div>
         </div>
         <div class="col-md-9">
-          <div class="card" style="border-radius: 25px; background-color: #EEE1E1 ;">
+          <div class="card p-3" style="border-radius: 25px; background-color: #EEE1E1 ;">
             <h3>
               <center>ข้อมูลสาขา</center>
             </h3>
@@ -94,7 +94,7 @@
       setTimeout(carousel, 2000);
     }
   </script>
-
+</main>
 </body>
 <?php include("footer.php"); ?>
 <script src='packages/core/main.js'></script>

@@ -39,10 +39,10 @@ $query = $sql->select();
                                 <td><a href="<?=URL?>show_event.php?id=<?=$res["ac_id"]?>"><?php echo $res["ac_title"]; ?></a></td>
                                 
                                 <td class="text-center">
-                                    <?=date("H-i",strtotime($res["ac_start_time"]))?>
+                                    <?=date("H:i",strtotime($res["ac_start_time"]))?>
                                     <?php
                                     if( $res["ac_start_time"] != $res["ac_end_time"] ){
-                                        echo " - ".date("H-i",strtotime($res["ac_end_time"]));
+                                        echo " - ".date("H:i",strtotime($res["ac_end_time"]));
                                     }
                                     ?>
                                 </td>

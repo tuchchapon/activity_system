@@ -41,7 +41,7 @@ if (!empty($_POST)) {
     
       <div class="form-group">
         <label for="detail">แก้ไขข้อมูลสาขา</label>
-        <textarea class="form-control textarea" rows="50" id="detail" placeholder="ข้อมูลสาขาวิชา" name="detail"><?php echo !empty($res["detail"]) ? $res["detail"] : "" ?></textarea>
+        <textarea class="form-control textarea" style="padding:10px 10px 10px 10px" rows="50" id="detail" placeholder="ข้อมูลสาขาวิชา" name="detail"><?php echo !empty($res["detail"]) ? $res["detail"] : "" ?></textarea>
       </div>
       <button type="submit" class="btn btn-primary mb-2">ยืนยัน</button>
     </form>
